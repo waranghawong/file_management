@@ -123,7 +123,7 @@ export default function Register() {
                     </Link>
 
                     <PrimaryButton className="ms-4" disabled={processing}>
-                        Registersss
+                        Register
                     </PrimaryButton>
                 </div>
             </form>

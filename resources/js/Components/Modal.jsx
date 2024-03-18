@@ -11,8 +11,9 @@ export default function Modal({ children, show = false, maxWidth = '2xl', closea
     const maxWidthClass = {
         sm: 'sm:max-w-sm',
         md: 'sm:max-w-md',
-        lg: 'sm:max-w-lg',
+        lg: 'max-w-7xl max-h-full',
         xl: 'sm:max-w-xl',
+        '2xl': 'sm:max-w-2xl',
         '2xl': 'sm:max-w-2xl',
     }[maxWidth];
 

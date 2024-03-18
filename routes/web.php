@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminPanel\AdminController;
 use App\Http\Controllers\AdminPanel\UsersController;
 use App\Http\Controllers\CustomerPanel\CustomerController;
 use App\Http\Controllers\FilesController;
+use App\Http\Controllers\PmrController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -49,6 +50,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('admin/users/create', [UsersController::class, 'store'])->name('users.store');
     Route::get('admin/users/{userprofile}', [UsersController::class, 'edit'])->name('users.edit');
     Route::patch('admin/users/{id}', [UsersController::class, 'update'])->name('users.update');
+    Route::post('uploadfile', [FilesController::class, 'addFiles'])->name('uploadfile');
+    Route::get('pmr', [PmrController::class, 'index'])->name('pmr');
 });
 
 Route::middleware(['auth', 'role:customer'])->group(function () {
