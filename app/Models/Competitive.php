@@ -13,6 +13,7 @@ class Competitive extends Model
     protected $table = 'competitive';
 
     protected $fillable = [
+        
         'pmr_id',
         'pre_proc_conf',
         'elligibilty_check',
@@ -26,6 +27,7 @@ class Competitive extends Model
         'bid_eveluation',
         'notice_of_award',
     ];
+
 
     protected $guarded = [];
 

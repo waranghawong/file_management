@@ -10,20 +10,30 @@
         "@inertiajs/react": "^1.0.0",
         "@tailwindcss/forms": "^0.5.3",
         "@vitejs/plugin-react": "^4.2.0",
-        "autoprefixer": "^10.4.12",
+        "autoprefixer": "^10.4.18",
         "axios": "^1.6.4",
         "laravel-vite-plugin": "^1.0.0",
-        "postcss": "^8.4.31",
+        "postcss": "^8.4.36",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
-        "tailwindcss": "^3.2.1",
+        "tailwindcss": "^3.4.1",
         "vite": "^5.0.0"
     },
     "dependencies": {
+        "@patternfly-labs/react-form-wizard": "^1.28.0",
+        "@patternfly/react-core": "^4.278.1",
+        "@patternfly/react-styles": "^5.2.1",
+        "flowbite": "^2.3.0",
         "flowbite-react": "^0.7.3",
+        "react-csv": "^2.2.2",
         "react-data-table-component": "^7.6.2",
+        "react-export-excel": "^0.5.3",
         "react-form-wizard-component": "^0.1.7",
+        "react-select": "^5.8.0",
+        "react-select-search": "^4.1.7",
+        "react-tabs": "^6.0.2",
         "react-toggle-dark-mode": "^1.1.1",
-        "react-use-wizard": "^2.3.0"
+        "react-use-wizard": "^2.3.0",
+        "rsuite": "^5.56.0"
     }
 }

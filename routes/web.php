@@ -51,7 +51,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('admin/users/{userprofile}', [UsersController::class, 'edit'])->name('users.edit');
     Route::patch('admin/users/{id}', [UsersController::class, 'update'])->name('users.update');
     Route::post('uploadfile', [FilesController::class, 'addFiles'])->name('uploadfile');
-    Route::get('pmr', [PmrController::class, 'index'])->name('pmr');
+    Route::get('/pmr', [PmrController::class, 'index'])->name('pmr');
+    Route::post('submit_pmr', [PmrController::class, 'store'])->name('submit_pmr');
 });
 
 Route::middleware(['auth', 'role:customer'])->group(function () {

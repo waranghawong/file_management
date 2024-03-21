@@ -73,6 +73,7 @@ export default function InsertFile( {auth, files} ) {
                                             id="file_name"
                                             name="file_name"
                                             className="mt-1 block w-full"
+                                            value={data.file_name}
                                             required
                                             isFocused = {true}
                                             autoComplete="file_name"

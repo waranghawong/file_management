@@ -12,6 +12,7 @@ class Amp extends Model
 
     protected $table = 'amp';
 
+    
     protected $fillable = [
         'pmr_id',
         'pr_recieved',
@@ -28,6 +29,8 @@ class Amp extends Model
         'pr_supply',
         'pr_end_user',
     ];
+
+   
 
     protected $guarded = [];
 

@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pmr', function (Blueprint $table) {
-            $table->id();
+            $table->string('id');
             $table->foreignIdFor(User::class);
             $table->string('pr_number');
             $table->string('rfq_number');
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('abc')->nullable();
             $table->string('contract_amount')->nullable();
             $table->string('supplier')->nullable();
-            $table->enum('status',['awarded', 'failed', 'close', 'partially_awarded', 'cancelled', 'incomplete', 'others'])->default('');
+            $table->enum('status',['awarded', 'failed', 'close', 'partially_awarded', 'cancelled', 'incomplete', 'others'])->nullable('');
             $table->timestamps();
         });
     }
