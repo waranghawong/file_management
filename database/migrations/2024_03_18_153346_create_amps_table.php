@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('amps', function (Blueprint $table) {
+        Schema::create('amp', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignIdFor(Pmr::class);
             $table->bigInteger('pr_recieved');

@@ -13,13 +13,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pmr', function (Blueprint $table) {
-            $table->string('id');
+            $table->id();
             $table->foreignIdFor(User::class);
             $table->string('pr_number');
             $table->string('rfq_number');
             $table->string('procurement_project');
             $table->string('end_user')->nullable();
-            $table->string('source_of_funds');
+            $table->string('source_of_funds')->nullable();
             $table->string('abc')->nullable();
             $table->string('contract_amount')->nullable();
             $table->string('supplier')->nullable();

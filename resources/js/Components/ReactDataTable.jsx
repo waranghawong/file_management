@@ -1,8 +1,45 @@
 import React, { useEffect, useState } from 'react'
-import DataTable from 'react-data-table-component'
+import DataTable, { createTheme } from 'react-data-table-component'
 import SecondaryButton from '@/Components/SecondaryButton';
+import useLocalStorage from 'use-local-storage';
+
 
 export default function ReactDataTable({items}) {
+
+    const [theme, setTheme] = useLocalStorage("isDark",false);
+
+    console.log(items)
+
+    createTheme('solarized', {
+        background: {
+          default: 'transparent',
+        },
+        text: {
+        primary:  theme ? '#ffff' :  '#00000',
+        secondary: '#2aa198',
+        },
+      });
+
+      const tableCustomStyles = {
+        headCells: {
+          style: {
+            fontSize: '15px',
+            fontWeight: 'bold',
+            paddingLeft: '10px',
+            marginTop: "10px",
+            backgroundColor: 'rgb(214 31 105 / var(--tw-bg-opacity))'
+          },
+        },
+        rows: {
+            style: {
+                fontSize: '15px',
+                marginTop: "10px",
+            },
+        },
+       
+       
+
+      }
 
     const columns = [
         {
@@ -46,13 +83,14 @@ export default function ReactDataTable({items}) {
     })
   return (
     <React.Fragment> 
-        <h1>List of Data</h1>
         <DataTable 
         columns={columns}
         data={items}
         fixedHeader
         selectableRowsHighlight
-
+        customStyles={tableCustomStyles}
+        theme="solarized"
+        title="Files" 
         subHeader
             subHeaderComponent={<input type="text" className="form-control" placeholder="search.." value= {search} onChange={ (e) => setSearch(e.target.value)}/>}
         />

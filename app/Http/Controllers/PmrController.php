@@ -22,7 +22,7 @@ class PmrController extends Controller
         $getpmr = Pmr::all();
 
         $currentYear = date('Y');
-        $config = ['table' => 'pmr','field'=>'pr_number', 'length' => 10, 'prefix'=>$currentYear.'-'];
+        $config = ['table' => 'pmr','field'=>'rfq_number', 'length' => 10, 'prefix'=>$currentYear.'-'];
         $id = IdGenerator::generate($config);
  
    
@@ -68,6 +68,7 @@ class PmrController extends Controller
       
         if($pmr && $request->input('pr_recieved') != '' || $request->input('pr_recieved') != '' ){
             if(empty($request->input('pre_proc'))){
+
                 $amp = Amp::create([
                 'pmr_id' => $pmr->id,
                 'pr_recieved' => $request->input('pr_recieved'),
@@ -90,6 +91,7 @@ class PmrController extends Controller
             }
             else if(empty($request->input('pr_recieved')) && $request->input('pre_proc') != ''){
                 $lastId = $pmr->id;
+                
                 $comp = Competitive::create([
 
                     'pmr_id' => $pmr->id,
@@ -110,7 +112,7 @@ class PmrController extends Controller
                 return 'not null';
             }
 
-            return redirect()->route('pmr');
+            return 'success';
 
         }
     }

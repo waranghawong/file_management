@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use App\Models\Files;
 use Inertia\Inertia;
 
@@ -25,7 +26,9 @@ class FilesController extends Controller
         $files->description=$request->input('description');
         $files->file_path=$request->file('file')->store('files');
         $files->save();
-        return $files;
+
+
+        return Redirect::route('admin.upload');
     }
 
     function storePmr(Request $request){
