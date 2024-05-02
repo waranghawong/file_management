@@ -4,11 +4,10 @@ import SecondaryButton from '@/Components/SecondaryButton';
 import useLocalStorage from 'use-local-storage';
 
 
-export default function ReactDataTable({items}) {
+export default function ReactDataTable({items,action}) {
 
     const [theme, setTheme] = useLocalStorage("isDark",false);
 
-    console.log(items)
 
     createTheme('solarized', {
         background: {
@@ -67,7 +66,7 @@ export default function ReactDataTable({items}) {
         {
             name: "Action",
             cell: (row) => (
-                <SecondaryButton className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">DELETE</SecondaryButton>
+              <a href={route(action, row.id)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View Details</a>
             )
         }
      

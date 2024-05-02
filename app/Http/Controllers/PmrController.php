@@ -21,7 +21,7 @@ class PmrController extends Controller
         $pmr_id = Pmr::select('id')->get();
         $getpmr = Pmr::all();
 
-        $currentYear = date('Y');
+        $currentYear = date('Y').'-';
         $config = ['table' => 'pmr','field'=>'rfq_number', 'length' => 10, 'prefix'=>$currentYear.'-'];
         $id = IdGenerator::generate($config);
  
@@ -29,7 +29,7 @@ class PmrController extends Controller
         
         return Inertia::render('Pmr',[
             'users' => $users,
-            'latest_pmr_id' => $id,
+            'latest_pmr_id' => $currentYear,
             'pmr' => $getpmr,
         ]);
     }
@@ -61,6 +61,7 @@ class PmrController extends Controller
             'abc' => $request->input('abc'),
             'contract_amount' => $request->input('contract_amount'),
             'status' => $request->input('status'),
+            
              
 
         ]);

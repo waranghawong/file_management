@@ -15,6 +15,7 @@ export default function LastForm({ formData, setFormData }) {
   ]
 
   const [selectedOption, setSelectedOption] = useState(false)
+  
   const handleChange = (selectedOption) => {
 
       console.log(`Option selected:`, selectedOption)
@@ -98,8 +99,10 @@ export default function LastForm({ formData, setFormData }) {
            
           />
           </div>
+
           
-            
+      
+
           </div>
       
         </div>

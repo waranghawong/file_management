@@ -24,13 +24,18 @@ export default function Pmr({auth, users, latest_pmr_id, pmr}) {
   });
 
 
+
+
   const [page, setPage] = useState(0);
+  const [showPmr, showAddPmrButton] = useState(true);
 
   const [ampState, setAmpState] = useState(false)
   const [compiState, setCompiState] = useState(false)
+
+
   
   const [formData, setFormData] = useState({
-    pr_number: "",
+    pr_number: latest_pmr_id,
     rfq_number: latest_pmr_id,
     procurement: "",
     end_user: "",
@@ -76,12 +81,10 @@ export default function Pmr({auth, users, latest_pmr_id, pmr}) {
     if (page === FormTitles.length - 1) {
       alert("FORM SUBMITTED");
 
-     
+      setIsOpen(false)
       post(route('submit_pmr', formData),{
         preserveScroll: true
     });
-    setIsOpen(false)
-    window.location.reload();
     } else {
       setPage((currPage) => currPage + 1);
     }
@@ -110,10 +113,18 @@ export default function Pmr({auth, users, latest_pmr_id, pmr}) {
             <Head title="PMR" />
 
             <div className="py-12">
-                <div className="max-w-8xl mx-auto sm:px-6 lg:px-8">
-                <button onClick={() => setIsOpen(true)} className="block text-white bg-pink-700 hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800" type="button">
-                    Create PMR
-                </button> <br />
+                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                  {
+                  auth.user.role === 'customer'
+                  ?
+                  ''
+                  :
+                  <button onClick={() => setIsOpen(true)} className="block text-white bg-pink-700 hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800" type="button">
+                     Create PMR
+                  </button>
+
+                  }
+                    <br />
                     <div className="ml-2 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
 
                     <Modal show={isOpen} maxWidth={'lg'}   >
@@ -188,7 +199,7 @@ export default function Pmr({auth, users, latest_pmr_id, pmr}) {
 
                           </div>
                           <div className="body mb-6 mt-6">{PageDisplay()}</div>
-                          <div className="footer">
+                          <div className="footer mb-9">
                             <div class="flex justify-around">
                             <button
                               type="button"
@@ -213,10 +224,10 @@ export default function Pmr({auth, users, latest_pmr_id, pmr}) {
                       </div>
                     </Modal>
 
-                    <div className="bg-white dark:bg-slate-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         {/* <div className="p-6 text-gray-900 dark:text-gray-100"></div> */}
                         {/* <Table items={files.data} columns={columns} primary="Id Number" action="users.edit"></Table> */}
-                        <PmrTable items ={pmr}/>
+                        <PmrTable items ={pmr} />
                     </div>
 
                     
@@ -233,4 +244,4 @@ export default function Pmr({auth, users, latest_pmr_id, pmr}) {
     </AuthenticatedLayout>
     </div>
   )
-}
+} 
