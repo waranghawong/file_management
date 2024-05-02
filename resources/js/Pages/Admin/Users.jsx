@@ -8,6 +8,7 @@ import { Head, Link } from '@inertiajs/react';
 const columns = [
     'name',
     'role',
+    'email',
 ] 
 export default function Dashboard({ auth, users }) {
     console.log(users)

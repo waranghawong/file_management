@@ -28,6 +28,8 @@ export default function Pmr({auth, users, latest_pmr_id, pmr}) {
 
   const [ampState, setAmpState] = useState(false)
   const [compiState, setCompiState] = useState(false)
+
+
   
   const [formData, setFormData] = useState({
     pr_number: "",
@@ -111,9 +113,16 @@ export default function Pmr({auth, users, latest_pmr_id, pmr}) {
 
             <div className="py-12">
                 <div className="max-w-8xl mx-auto sm:px-6 lg:px-8">
-                <button onClick={() => setIsOpen(true)} className="block text-white bg-pink-700 hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800" type="button">
+                {
+                  auth.user.role === 'customer'
+                  ?
+                  ''
+                  :
+                  <button onClick={() => setIsOpen(true)} className="block text-white bg-pink-700 hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800" type="button">
                     Create PMR
-                </button> <br />
+                </button> 
+                }
+                <br />
                     <div className="ml-2 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
 
                     <Modal show={isOpen} maxWidth={'lg'}   >
