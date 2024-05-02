@@ -1,5 +1,4 @@
-import { useState} from 'react';
-import { useEffect } from 'react';
+import { useState,useEffect} from 'react';
 import Table from '@/Components/Tables';
 import Modal from '@/Components/Modal';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
@@ -8,8 +7,9 @@ import Pagination from '@/Components/Pagination';
 import { Head, useForm } from '@inertiajs/react';
 import TextInput from '@/Components/TextInput';
 import SecondaryButton from '@/Components/SecondaryButton';
+import Select from 'react-select'
 import ReactDataTable from '@/Components/ReactDataTable';
-
+import AsyncSelect from 'react-select/async';
 
 const columns = [
     'file_name',
@@ -18,13 +18,24 @@ const columns = [
     'created_at',
 ] 
 
+   
 
-export default function InsertFile( {auth, files} ) {
+
+
+
+
+export default function InsertFile( {auth, files, folder_name} ) {
+
+
+    
+    const [showFolderInput, setFolderInput] = useState(true); 
 
     const { data, setData, post, processing, errors, reset } = useForm({
         file_name: '',
         file: '',
         description: '',
+        folder_name: '',
+        folder_id: '',
         uploader_id: auth.user.id,
     });
 
@@ -42,6 +53,38 @@ export default function InsertFile( {auth, files} ) {
         });
 
     };
+
+const newFolderSelected = (e) =>{
+    let index = e.nativeEvent.target.selectedIndex;
+    let label = e.nativeEvent.target[index].text;
+
+
+    const value = e.target.value;
+
+
+
+    if(e.target.value == 'other'){
+        setFolderInput(false)
+        setData({ ...data, folder_id: "", folder_name: ""})
+    }
+    else{
+        setFolderInput(true)
+        setData({ ...data, folder_id: e.target.value, folder_name: label})
+    }
+}
+
+const loadOptions = (searchValue, callback) => {
+    setTimeout(()=>{
+      
+
+    const filteredOptions = folder_name.filter((option => option.label.toLowerCase().includes(searchValue.toLowerCase()))
+
+  
+
+    );
+    callback(filteredOptions)
+    },1000);
+}
 
 
   return (
@@ -77,11 +120,9 @@ export default function InsertFile( {auth, files} ) {
                                         <TextInput
                                             id="file_name"
                                             name="file_name"
-                                            className="mt-1 block w-full"
+                                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             value={data.file_name}
                                             required
-                                            isFocused = {true}
-                                            autoComplete="file_name"
                                             onChange = {(e) => setData('file_name', e.target.value)}
                                         />
                                          <InputError message={errors.file_name} className="mt-2" />
@@ -94,13 +135,33 @@ export default function InsertFile( {auth, files} ) {
                                     
                                     <div className="col-span-2 sm:col-span-1">
                                         <label for="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                                        <select id="category" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                            <option selected="">Select category</option>
-                                            <option value="a">&amp;</option>
-                                            <option value="b">&amp;</option>
-                                            <option value="c">&amp;</option>
-                                            <option value="d">&amp;</option>
+                                
+                                       
+                                        <select 
+                                        id="category" 
+                                        onChange={newFolderSelected} 
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                        >
+                                               <option value="">Select Folder</option> 
+                                            {
+                                                folder_name.map((option) => (
+                                                    <option value={option.value}>{option.label}</option>
+                                                ))
+                                            }
+                                         <option value="other">New Folder</option>
+                                
+                                         
                                         </select>
+                                        <br />
+                                        <TextInput
+                                            id="folder_name"
+                                            name="folder_name"
+                                            className={ showFolderInput  ? 'hidden' : ''  + "p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}
+                                            value={data.folder_name}
+                                            placeholder="Folder Name"
+                                            onChange = {(e) => setData('folder_name', e.target.value)}
+                                        />
+                                         <InputError message={errors.folder_name} className="mt-2" />
                                     </div>
                                     <div className="col-span-2 sm:col-span-1">
                                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
@@ -127,7 +188,7 @@ export default function InsertFile( {auth, files} ) {
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         {/* <div className="p-6 text-gray-900 dark:text-gray-100"></div> */}
                         {/* <Table items={files.data} columns={columns} primary="Id Number" action="users.edit"></Table> */}
-                        <ReactDataTable items ={files.data}/>
+                        <ReactDataTable items ={files.data} action={"edit_file_info"}/>
                         <Pagination class="mt-6" links={files.links} />
                     </div>
                 </div>

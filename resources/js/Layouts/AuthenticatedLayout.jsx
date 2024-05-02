@@ -92,7 +92,7 @@ export default function Authenticated({ user, header, children }) {
                             </svg>
                         </button>
 
-
+                        
                         <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                        
                       

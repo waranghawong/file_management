@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Files;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -47,6 +48,6 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     public function files(){
-        return $this->hasMany(File::class);
+        return $this->hasMany(Files::class);
     }
 }

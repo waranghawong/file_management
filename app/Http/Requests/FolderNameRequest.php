@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCompetitiveRequest extends FormRequest
+class FolderNameRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class StoreCompetitiveRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'folder_name' => ['required','unique:dir_folder|max:255'],
+            'name' => ['required', 'string', 'max:255'],
         ];
     }
 }
