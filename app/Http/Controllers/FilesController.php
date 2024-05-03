@@ -61,6 +61,7 @@ class FilesController extends Controller
     function storePmr(Request $request){
         return 'pmr';
     }
+    
 
     public function edit(string $id){
         $get_file = Files::where('id', $id)->with('folder')->get();
@@ -72,7 +73,7 @@ class FilesController extends Controller
 
         return Inertia::render('Admin/EditFile', [
             'get_file' => $get_file == false ? '' : $get_file[0],
-            'folder_name' => ucfirst($data->folder_name)
+            'folder_name' => $data == false ? '' : ucfirst($data->folder_name)
         ]);
         
     }
@@ -84,6 +85,15 @@ class FilesController extends Controller
         }
         $path = Storage::path($dir);
         return response()->file($path);
+    }
+
+    public function destroy(string $id)
+    {
+
+        $user=Files::find($id);
+        $user->delete(); 
+
+        return redirect()->route('admin.upload');
     }
 }
  

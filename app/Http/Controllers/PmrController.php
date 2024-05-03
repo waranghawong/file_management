@@ -49,6 +49,8 @@ class PmrController extends Controller
     {
         $userId = auth()->user()->id;
 
+    
+
      
         $pmr = Pmr::create([
             'pr_number' => $request->input('pr_number'),
@@ -67,7 +69,7 @@ class PmrController extends Controller
         ]);
 
       
-        if($pmr && $request->input('pr_recieved') != '' || $request->input('pr_recieved') != '' ){
+        if($pmr){
             if(empty($request->input('pre_proc'))){
 
                 $amp = Amp::create([
@@ -90,9 +92,8 @@ class PmrController extends Controller
               
 
             }
-            else if(empty($request->input('pr_recieved')) && $request->input('pre_proc') != ''){
+            else{
                 $lastId = $pmr->id;
-                
                 $comp = Competitive::create([
 
                     'pmr_id' => $pmr->id,
@@ -109,11 +110,8 @@ class PmrController extends Controller
                     'notice_of_award' => $request->input('notice_of_awardd'),
                 ]);
             }
-            else{
-                return 'not null';
-            }
 
-            return 'success';
+            // return redirect()->back();
 
         }
     }
@@ -130,8 +128,12 @@ class PmrController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
-        //
+    {        
+        $getPmr = PMR::where('id', $id)->get();
+
+        return Inertia::render('Admin/EditPmr',[
+            'pmr'=> $getPmr
+        ]);
     }
 
     /**
@@ -147,6 +149,10 @@ class PmrController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+     
+        $user=PMR::find($id);
+        $user->delete(); 
+
+        return redirect()->route('pmr');
     }
 }

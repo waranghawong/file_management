@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Pmr;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Amp extends Model
 {
@@ -34,7 +35,7 @@ class Amp extends Model
 
     protected $guarded = [];
 
-    public function pmr()
+    public function pmr() : BelongsTo
     {
         return $this->belongsTo(Pmr::class);
     }

@@ -83,7 +83,10 @@ export default function Pmr({auth, users, latest_pmr_id, pmr}) {
 
       setIsOpen(false)
       post(route('submit_pmr', formData),{
-        preserveScroll: true
+        preserveScroll: true,
+        onSuccess: () => {
+          window.location.reload()
+        },
     });
     } else {
       setPage((currPage) => currPage + 1);
@@ -219,7 +222,7 @@ export default function Pmr({auth, users, latest_pmr_id, pmr}) {
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         {/* <div className="p-6 text-gray-900 dark:text-gray-100"></div> */}
                         {/* <Table items={files.data} columns={columns} primary="Id Number" action="users.edit"></Table> */}
-                        <PmrTable items ={pmr} />
+                        <PmrTable items ={pmr} action="edit_pmr"/>
                     </div>
 
                     

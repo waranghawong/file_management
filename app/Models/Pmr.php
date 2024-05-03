@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Amp;
 use App\Models\Competitive;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Pmr extends Model
 {
@@ -30,7 +31,7 @@ class Pmr extends Model
 
     protected $guarded = [];
 
-    protected $with = ['user', 'amp', 'competitive'];
+    protected $with = ['user', 'amps', 'competitive'];
 
 
     public function user()
@@ -38,7 +39,7 @@ class Pmr extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function amp()
+    public function amps()
     {
         return $this->hasOne(Amp::class, 'pmr_id', 'id');
     }
