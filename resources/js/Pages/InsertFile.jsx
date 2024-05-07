@@ -95,7 +95,7 @@ const loadOptions = (searchValue, callback) => {
         >
             <Head title="File Management" />
            
-            <div className="py-12">
+            <div className="py-32">
                 <div className="max-w-8xl mx-auto sm:px-6 lg:px-8"> 
                 <button onClick={() => setIsOpen(true)} className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
                     Add Document
@@ -184,12 +184,24 @@ const loadOptions = (searchValue, callback) => {
                 </Modal>
 
 
-                
-                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        {/* <div className="p-6 text-gray-900 dark:text-gray-100"></div> */}
-                        {/* <Table items={files.data} columns={columns} primary="Id Number" action="users.edit"></Table> */}
-                        <ReactDataTable items ={files.data} action={"edit_file_info"}/>
-                        <Pagination class="mt-6" links={files.links} />
+                    <div className="w-full  mx-auto sm:px-6 lg:px-8 space-y-6 p-4 shadow-lg bg-white dark:bg-slate-800 rounded-xl bg-white">
+                        <div class="grid grid-cols-4 md:grid-cols-6 gap-4">
+                            {
+                                 folder_name.map((item, index) => (
+                                    <div className='mt-5 '>
+                                        <a href={route("show_files", item.value)}>
+                                            <div class="w-64 h-50 bg-white rounded-lg shadow-md p-4 inline-flex items-center  dark:bg-gray-700 dark:border-gray-600  dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+                                                </svg> <span className='ml-2'>{item.label}</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                 ))
+                            }
+                       
+                        
+                        </div>
                     </div>
                 </div>
             </div>

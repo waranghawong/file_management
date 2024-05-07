@@ -63,8 +63,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('submit_pmr', [PmrController::class, 'store'])->name('submit_pmr');
     Route::get('edit_pmr/{id}', [PmrController::class, 'edit'])->name('edit_pmr');
     Route::delete('admin/deletepmr/{id}', [PmrController::class, 'destroy'])->name('pmr.destroy');
-
+    
     Route::get('view_pdf/{id}', [FilesController::class, 'viewpdf'])->name('view_pdf');
+    Route::get('show_files/{id}', [FilesController::class, 'show_files'])->name('show_files');
 
 });
 

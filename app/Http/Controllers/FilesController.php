@@ -50,7 +50,7 @@ class FilesController extends Controller
 
             $files->user_id=$request->input('uploader_id');
             $files->file_name=$request->input('file_name');
-            $files->folder_name_id=$request->input('folder_id');
+            $files->folder_name_id=$id;
             $files->description=$request->input('description');
             $files->file_path=$request->file('file')->store($folder);
             $files->save();
@@ -94,6 +94,13 @@ class FilesController extends Controller
         $user->delete(); 
 
         return redirect()->route('admin.upload');
+    }
+
+    public function show_files(string $id){
+        $get_file = Files::where('folder_name_id', $id)->with('folder')->paginate(10);
+        return Inertia::render('Files',[
+            'get_file' => $get_file
+         ]);
     }
 }
  

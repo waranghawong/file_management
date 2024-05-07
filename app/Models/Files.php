@@ -23,7 +23,7 @@ class Files extends Model
 
     protected $guarded = [];
 
-    protected $with = ['user'];
+    protected $with = ['user','folder'];
 
     
     public function user()
