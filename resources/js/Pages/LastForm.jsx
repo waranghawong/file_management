@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import TextInput from '@/Components/TextInput'
 import Select from 'react-select';
 
@@ -15,7 +15,19 @@ export default function LastForm({ formData, setFormData }) {
   ]
 
   const [selectedOption, setSelectedOption] = useState(false)
-  
+  const sourceOfFundsRef = useRef(null);
+  const supplierRef = useRef(null);
+  const abcRef = useRef(null);
+  const contractAmountRef = useRef(null);
+  const statusRef = useRef(null);
+
+  const handleEnterPress = (e, nextRef) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      nextRef.current.focus();
+    }
+  };
+
   const handleChange = (selectedOption) => {
 
       console.log(`Option selected:`, selectedOption)
@@ -35,8 +47,10 @@ export default function LastForm({ formData, setFormData }) {
             onChange={(event) =>
               setFormData({ ...formData, source_of_funds: event.target.value })
             }
+            onKeyPress={(e) => handleEnterPress(e, supplierRef)}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-            required />
+            ref={sourceOfFundsRef}
+             />
           </div>
           <div class="mb-5">
             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Supplier</label>
@@ -46,8 +60,10 @@ export default function LastForm({ formData, setFormData }) {
             onChange={(event) =>
               setFormData({ ...formData, supplier: event.target.value })
             }
+            onKeyPress={(e) => handleEnterPress(e, abcRef)}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-            required />
+            ref={supplierRef}
+             />
           </div>
           <div class="mb-5">
             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ABC</label>
@@ -64,8 +80,10 @@ export default function LastForm({ formData, setFormData }) {
               onChange={(event) =>
                 setFormData({ ...formData, abc: event.target.value })
               }
+              onKeyPress={(e) => handleEnterPress(e, contractAmountRef)}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" 
-              required />
+              ref={abcRef}
+               />
             </div>
           </div>
           <div class="mb-5">
@@ -82,8 +100,10 @@ export default function LastForm({ formData, setFormData }) {
               onChange={(event) =>
                 setFormData({ ...formData, contract_amount: event.target.value })
               }
+              onKeyPress={(e) => handleEnterPress(e, statusRef)}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" 
-              required />
+              ref={contractAmountRef}
+              />
             </div>
           </div>
           <div class="mb-5">
@@ -96,6 +116,7 @@ export default function LastForm({ formData, setFormData }) {
               handleChange(event)
             }
             options={options}
+            ref={statusRef}
            
           />
           </div>
