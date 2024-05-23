@@ -22,7 +22,7 @@ export default function ReactDataTable({items, action}) {
     const columns = [
         {
             name: "id",
-            selector: row => '#Q'+ row.rfq_number.substring(5)
+            selector: row => '#'+ row.rfq_number.substring(5)
         },
         {
             name: "Pr Number",
@@ -56,18 +56,14 @@ export default function ReactDataTable({items, action}) {
         },
         {
             name: "ABC",
-            selector: row => row.abc,
+            selector: row => '₱'+ row.abc,
             sortable: true
         },
         {
             name: "Contract Amount",
-            selector: row => row.contract_amount,
+            selector: row => '₱'+ row.contract_amount,
             sortable: true
-        }, 
-         {
-            name: "ABC",
-            selector: row => row.abc,
-            sortable: true
+        
         },
         {
             name: "Status",

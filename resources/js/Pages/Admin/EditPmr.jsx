@@ -12,6 +12,7 @@ import DangerButton from '@/Components/DangerButton';
 import SecondaryButton from '@/Components/SecondaryButton';
 
 export default function EditPmr({auth, pmr}) {
+    console.log(auth.user.role)
     
     const {  delete: destroy, } = useForm({});
     const [confirmingUserDeletion, setDeletePmr] = useState(false);
@@ -448,7 +449,7 @@ export default function EditPmr({auth, pmr}) {
                                     <div class="relative z-0 w-full group">
                                     <input type="date"
                                         name="bid_evaluation"
-                                        value={data.bid_evaluation}
+                                        value={data.bid_evaluation}                                                         
                                         onChange={(event) =>
                                             setData({ ...data, bid_evaluation: event.target.value })
                                             }
@@ -486,9 +487,9 @@ export default function EditPmr({auth, pmr}) {
                                     Source of Funds
                                     </label>
                                     <TextInput
-                                     value={data.end_user}
+                                     value={data.source_of_funds}
                                      onChange={(event) =>
-                                         setData({ ...data, end_user: event.target.value })
+                                         setData({ ...data, supplier: event.target.value })
                                      }
                                     type="text"
                                     className="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -500,9 +501,9 @@ export default function EditPmr({auth, pmr}) {
                                     </label> 
                                     <TextInput
                                     type="text"
-                                    value={data.end_user}
+                                    value={data.supplier}
                                     onChange={(event) =>
-                                        setData({ ...data, end_user: event.target.value })
+                                        setData({ ...data, supplier: event.target.value })
                                     }
                                     className="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     />
@@ -513,9 +514,9 @@ export default function EditPmr({auth, pmr}) {
                                     </label>
                                     <TextInput
                                     type="text"
-                                    value={data.end_user}
+                                    value={data.abc}
                                     onChange={(event) =>
-                                        setData({ ...data, end_user: event.target.value })
+                                        setData({ ...data, abc: event.target.value })
                                     }
                                     className="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     />
@@ -526,9 +527,9 @@ export default function EditPmr({auth, pmr}) {
                                     </label>
                                     <TextInput
                                     type="text"
-                                    value={data.end_user}
+                                    value={data.contract_amount}
                                     onChange={(event) =>
-                                        setData({ ...data, end_user: event.target.value })
+                                        setData({ ...data, contract_amount: event.target.value })
                                     }
                                     className="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     />
@@ -539,9 +540,9 @@ export default function EditPmr({auth, pmr}) {
                                     </label>
                                     <TextInput
                                     type="text"
-                                    value={data.end_user}
+                                    value={data.status}
                                     onChange={(event) =>
-                                        setData({ ...data, end_user: event.target.value })
+                                        setData({ ...data, status: event.target.value })
                                     }
                                     className="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     />
@@ -559,14 +560,21 @@ export default function EditPmr({auth, pmr}) {
                         </button>
                         &nbsp;
                         &nbsp;
-                        <button 
+                        {
+                            auth.user.role == "customer"
+                            ?
+                            ''
+                            :
+                            <button 
                             disabled={processing} 
                             onClick={confirmUserDeletion}
                             className="text-white inline-flex items-center bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-blue-800"
                             >
                             <svg className="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
                                 Delete
-                        </button>
+                             </button>   
+                        }  
+                    
                 </form>
             </div>
         </div>
@@ -599,7 +607,7 @@ export default function EditPmr({auth, pmr}) {
 
                     <div className="mt-6 flex justify-end">
                         <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
-
+                                            
                         <DangerButton className="ms-3" disabled={processing}>
                             Delete
                         </DangerButton>

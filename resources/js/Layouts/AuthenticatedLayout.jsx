@@ -25,7 +25,7 @@ export default function Authenticated({ user, header, children }) {
       
         setTheme(true)
     }
-
+    console.log(user)
 
     return (
         <div className="min-h-screen bg-gray-100 dark:bg-gray-900 ">
@@ -109,9 +109,17 @@ export default function Authenticated({ user, header, children }) {
             <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' w-full flex-grow lg:flex lg:items-center lg:w-auto lg:block mt-2 lg:mt-0 bg-white z-20 '} id="nav-content">
                 <ul class="list-reset dark:bg-slate-800 lg:flex flex-1 items-center px-4 md:px-0">
                     <li class="mr-6 my-2 md:my-0">
-                    <NavLink href={route('admin.dashboard')} active={route().current('admin.dashboard')}>
+                    {
+                        user.role == "customer"
+                        ?
+                        <NavLink href={route('customer.dashboard')} active={route().current('customer.dashboard')}>
                             <i class="fas fa-home fa-fw mr-3 text-pink-600 dark:text-white"></i><span class="pb-1 md:pb-0 text-sm">Home</span>
-                    </NavLink>
+                        </NavLink>
+                        :
+                        <NavLink href={route('admin.dashboard')} active={route().current('admin.dashboard')}>
+                            <i class="fas fa-home fa-fw mr-3 text-pink-600 dark:text-white"></i><span class="pb-1 md:pb-0 text-sm">Home</span>
+                         </NavLink>
+                    }
                     </li>
                     <li class="mr-6 my-2 md:my-0">
                     <NavLink href={route('pmr')} active={route().current('pmr')}>

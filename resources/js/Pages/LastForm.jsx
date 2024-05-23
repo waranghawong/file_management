@@ -10,7 +10,7 @@ export default function LastForm({ formData, setFormData }) {
     {  value: "close", label: "Close"},
     {  value: "partially awarded", label: "Partially Awarded"},
     {  value: "cancelled", label: "Cancelled"},
-    {  value: "incomplete", label: "Incomplete"},
+    {  value: "inprocess", label: "Inprocess"},
     {  value: "others", label: "Others"},
   ]
 

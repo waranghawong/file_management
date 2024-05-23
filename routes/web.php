@@ -41,13 +41,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/pmr', [PmrController::class, 'index'])->name('pmr');
     Route::post('submit_pmr', [PmrController::class, 'store'])->name('submit_pmr');
-});
 
-require __DIR__.'/auth.php';
-
-Route::middleware(['auth', 'role:admin'])->group(function () {
-
-    Route::get('admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('admin/upload', [FilesController::class, 'index'])->name('admin.upload'); 
     Route::get('admin/users', [UsersController::class, 'index'])->name('users');
     Route::get('admin/users/new', [UsersController::class, 'create'])->name('users.new');
@@ -66,10 +60,20 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     
     Route::get('view_pdf/{id}', [FilesController::class, 'viewpdf'])->name('view_pdf');
     Route::get('show_files/{id}', [FilesController::class, 'show_files'])->name('show_files');
+});
+
+require __DIR__.'/auth.php';
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+
+    Route::get('admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+   
 
 });
 
 Route::middleware(['auth', 'role:customer'])->group(function () {
     Route::get('customer/dashboard', [CustomerController::class, 'index'])->name('customer.dashboard');
- 
+
+
+
 });

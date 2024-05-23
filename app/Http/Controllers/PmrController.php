@@ -69,7 +69,7 @@ class PmrController extends Controller
         ]);
 
       
-        if($pmr){
+        if($request->input('pr_recieved') ||  $request->input('rfq_posting') || $request->input('pr_for_rfq') || $request->input('rfq_canvass') || $request->input('rfq_returned') || $request->input('rfq_deliberation') || $request->input('rfq_abstract') || $request->input('bac_resolution') || $request->input('noa') || $request->input('justification') || $request->input('pr_supply') || $request->input('pre_end') ){
             if(empty($request->input('pre_proc'))){
 
                 $amp = Amp::create([

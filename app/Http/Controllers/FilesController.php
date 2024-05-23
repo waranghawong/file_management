@@ -98,8 +98,9 @@ class FilesController extends Controller
 
     public function show_files(string $id){
         $get_file = Files::where('folder_name_id', $id)->with('folder')->paginate(10);
+        
         return Inertia::render('Files',[
-            'get_file' => $get_file
+            'get_file' => $get_file == false ? '' :  $get_file
          ]);
     }
 }

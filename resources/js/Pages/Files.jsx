@@ -18,6 +18,7 @@ const columns = [
 ] 
 
 export default function Files({auth, get_file}) {
+    console.log(get_file)
 
   const [isOpen , setIsOpen] = useState(false)
 
@@ -25,8 +26,8 @@ export default function Files({auth, get_file}) {
         file_name: '',
         file: '',
         description: '',
-        folder_name: get_file.data[0].folder.folder_name,
-        folder_id: get_file.data[0].folder.id,
+        folder_name: get_file.data == '' ? ''  : get_file.data[0].folder.folder_name ,
+        folder_id:  get_file.data == '' ? ''  :  get_file.data[0].folder.id,
         uploader_id: auth.user.id,
     });
 

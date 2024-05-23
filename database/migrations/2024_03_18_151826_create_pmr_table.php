@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('abc')->nullable();
             $table->string('contract_amount')->nullable();
             $table->string('supplier')->nullable();
-            $table->enum('status',['awarded', 'failed', 'close', 'partially_awarded', 'cancelled', 'incomplete', 'others'])->nullable('');
+            $table->enum('status',['awarded', 'failed', 'close', 'partially_awarded', 'cancelled', 'inprocess', 'others'])->nullable('');
             $table->timestamps();
         });
     }
