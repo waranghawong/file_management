@@ -24,13 +24,15 @@ export default function Pmr({auth, users, latest_pmr_id, pmr}) {
   });
 
 
-
+  const [disableButton, setDisableButton] = useState(false);
 
   const [page, setPage] = useState(0);
   const [showPmr, showAddPmrButton] = useState(true);
 
   const [ampState, setAmpState] = useState(false)
   const [compiState, setCompiState] = useState(false)
+
+  const [error, setError] = useState('');
 
 
   
@@ -45,7 +47,7 @@ export default function Pmr({auth, users, latest_pmr_id, pmr}) {
     contract_signing: "",
     posting_philgeps: "",
     notice_of_proceed: "",
-    date_of_bac: "",
+    date: "",
     opening_canvass: "",
     bid_evaluation: "",
     pre_bid: "",
@@ -75,21 +77,37 @@ export default function Pmr({auth, users, latest_pmr_id, pmr}) {
 
   });
 
+
+
   const [isOpen , setIsOpen] = useState(false);
 
  const submitData = () => {
     if (page === FormTitles.length - 1) {
-      alert("FORM SUBMITTED");
+      if(formData.source_of_funds == '' || formData.supplier == '' || formData.abc == '' || formData.contract_amount == '' || formData.status == ''){
+        setError('required*');
+      }
+      else{
+        alert("FORM SUBMITTED");
 
-      setIsOpen(false)
-      post(route('submit_pmr', formData),{
-        preserveScroll: true,
-        onSuccess: () => {
-          window.location.reload()
-        },
-    });
+        setIsOpen(false)
+        post(route('submit_pmr', formData),{
+            preserveScroll: true,
+            onSuccess: () => {
+              window.location.reload()
+            },
+        });
+
+      }
+      
     } else {
-      setPage((currPage) => currPage + 1);
+      
+      if(formData.procurement == '' || formData.end_user == '' || formData.date == ''){
+        setError('required*');
+      }
+      else{
+        setPage((currPage) => currPage + 1);
+      }
+     
     }
   }
 
@@ -99,11 +117,13 @@ export default function Pmr({auth, users, latest_pmr_id, pmr}) {
 
   const PageDisplay = () => {
     if (page === 0) {
-      return <PmrFrom formData={formData} setFormData={setFormData}/>;
-    } else if (page === 1) {
+      return <PmrFrom formData={formData} setFormData={setFormData} error={error}/>;
+    }
+    else if (page === 1) {
       return <Others formData={formData} setFormData={setFormData} users={users} />;
-    } else {
-      return <LastForm formData={formData} setFormData={setFormData} />;
+    } 
+    else {
+      return <LastForm formData={formData} setFormData={setFormData} errors={error}/>;
     }
   };
  
@@ -194,27 +214,27 @@ export default function Pmr({auth, users, latest_pmr_id, pmr}) {
 
                           </div>
                           <div className="body mb-6 mt-6">{PageDisplay()}</div>
-                          <div className="footer mb-9">
-                            <div class="flex justify-around">
-                            <button
-                              type="button"
-                              class="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                              
-                              disabled={page == 0}
-                              onClick={() => {
-                                setPage((currPage) => currPage - 1);
-                              }}
-                            >
-                                Prev
-                            </button>
-                            <button
-                            class="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                                onClick={submitData}
+                            <div className="footer mb-9">
+                              <div class="flex justify-around">
+                              <button
+                                type="button"
+                                class="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                                
+                                disabled={page == 0}
+                                onClick={() => {
+                                  setPage((currPage) => currPage - 1);
+                                }}
                               >
-                                {page === FormTitles.length - 1 ? "Submit" : "Next"}
-                            </button>
+                                  Prev
+                              </button>
+                              <button
+                              class="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                                  onClick={submitData}
+                                >
+                                  {page === FormTitles.length - 1 ? "Submit" : "Next"}
+                              </button>
+                              </div>
                             </div>
-                          </div>
                         </div>
                       </div>
                     </Modal>

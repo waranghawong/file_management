@@ -46,6 +46,11 @@ export default function ReactDataTable({items,action}) {
             selector: row => '#'+ row.id
         },
         {
+          name: "Folder Name",
+          selector: row => row.subfolder.folder_name,
+          sortable: true
+        },
+        {
             name: "File Name",
             selector: row => row.file_name,
        
@@ -63,6 +68,7 @@ export default function ReactDataTable({items,action}) {
             selector: row => row.user.name,
             sortable: true
         },
+       
         {
             name: "Action",
             cell: (row) => (

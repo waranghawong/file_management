@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Notifications\MyNotification;
 use Inertia\Inertia;
 use App\Models\User;
 use App\Models\Pmr;
@@ -63,6 +64,7 @@ class PmrController extends Controller
             'abc' => $request->input('abc'),
             'contract_amount' => $request->input('contract_amount'),
             'status' => $request->input('status'),
+            'date' => $request->input('date'),
             
              
 
@@ -130,7 +132,6 @@ class PmrController extends Controller
     public function edit(string $id)
     {        
         $getPmr = PMR::where('id', $id)->get();
-
         return Inertia::render('Admin/EditPmr',[
             'pmr'=> $getPmr
         ]);
@@ -141,7 +142,68 @@ class PmrController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $userId = auth()->user()->id;
+
+    
+
+     
+        $pmr = Pmr::where('id', $id)->update([
+            'pr_number' => $request->input('pr_number'),
+            'user_id' => $userId,
+            'rfq_number' => $request->input('rfq_number'),
+            'procurement_project' => $request->input('procurement'),
+            'end_user' => $request->input('end_user'),
+            'source_of_funds' => $request->input('source_of_funds'),
+            'supplier' => $request->input('supplier'),
+            'abc' => $request->input('abc'),
+            'contract_amount' => $request->input('contract_amount'),
+            'status' => $request->input('status'),
+            'date' => $request->input('date'),
+        ]);
+
+      
+        if($pmr){
+            if(empty($request->input('pre_proc'))){
+
+                $amp = Amp::where('pmr_id', $id)->update([
+                'pr_recieved' => $request->input('pr_recieved'),
+                'rfq_for_posting' => $request->input('rfq_posting'),
+                'pr_for_rfqs' => $request->input('pr_for_rfq'),
+                'rfq_for_canvass' => $request->input('rfq_canvass'),
+                'rfq_returned' => $request->input('rfq_returned'),
+                'rfq_for_deliberation' => $request->input('rfq_deliberation'),
+                'rfq_for_abstract' => $request->input('rfq_abstract'),
+                'original_abstract' => $request->input('original_abstract'),
+                'bac_resolution' => $request->input('bac_resolution'),
+                'noa_contract_supply' => $request->input('noa'),
+                'justification' => $request->input('justification'),
+                'pr_supply' => $request->input('pr_supply'),
+                'pr_end_user' => $request->input('pre_end'),
+
+                ]);
+              
+
+            }
+            else{
+                $comp = Competitive::where('pmr_id', $id)->update([
+                    'pre_proc_conf' => $request->input('pre_proc'),
+                    'elligibilty_check' => $request->input('eligibility_check'),
+                    'post_quality' => $request->input('post_quality'),
+                    'contract_signing' => $request->input('contract_signing'),
+                    'posting_on_philgeps' => $request->input('posting_philgeps'),
+                    'notice_of_proceed' => $request->input('notice_of_proceed'),
+                    'date_of_bac' => $request->input('date_of_bac'),
+                    'opening_canvass' => $request->input('opening_canvass'),
+                    'bid_eveluation' => $request->input('bid_evaluation'),
+                    'pre_bid_conf' => $request->input('pre_bid'),
+                    'notice_of_award' => $request->input('notice_of_awardd'),
+                ]);
+            }
+
+
+        }
+        
     }
 
     /**

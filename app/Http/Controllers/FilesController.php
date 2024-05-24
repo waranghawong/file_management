@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Files;
+use App\Models\SubFolder;
 use App\Models\FolderName;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
@@ -58,6 +59,46 @@ class FilesController extends Controller
 
     }
 
+    function uploadfilesubfolder(Request $request)
+    { 
+        $files = new Files;
+        $asd = SubFolder::where('id', $request['subfolder_id'])->exists();
+
+        $folder = $request['folder_name'];
+
+        if($asd){
+
+            $files->user_id=$request->input('uploader_id');
+            $files->file_name=$request->input('file_name');
+            $files->folder_name_id=$request->input('folder_id');
+            $files->description=$request->input('description');
+            $files->subfolder_name_id=$request->input('subfolder_id');
+            $files->file_path=$request->file('file')->store($folder);
+            $files->save();
+            
+        }
+        else{
+         
+        
+            $folder_name = new SubFolder;
+            $folder_name->folder_id=$request['folder_id'];
+            $folder_name->folder_name=$request['subfolder_name'];
+            $folder_name->user_id=$request['uploader_id'];
+            $folder_name->save();
+
+            $id = $folder_name->id;
+
+            $files->user_id=$request->input('uploader_id');
+            $files->file_name=$request->input('file_name');
+            $files->subfolder_name_id=$id;
+            $files->description=$request->input('description');
+            $files->folder_name_id=$request->input('folder_id');
+            $files->file_path=$request->file('file')->store($folder);
+            $files->save();
+        }
+
+    }
+
     function storePmr(Request $request){
         return 'pmr';
     }
@@ -98,8 +139,10 @@ class FilesController extends Controller
 
     public function show_files(string $id){
         $get_file = Files::where('folder_name_id', $id)->with('folder')->paginate(10);
+        $get_subfolder = SubFolder::select(['id as value','folder_name as label'])->where('folder_id', $id)->get();
         return Inertia::render('Files',[
-            'get_file' => $get_file
+            'get_file' => $get_file,
+            'subfolder' => $get_subfolder
          ]);
     }
 }

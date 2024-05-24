@@ -1,7 +1,7 @@
 import TextInput from '@/Components/TextInput'
 import React, { useRef } from 'react';
 
-export default function PmrFrom({ formData, setFormData }) {
+export default function PmrFrom({ formData, setFormData, error }) {
     const prNumberRef = useRef(null);
     const rfqNumberRef = useRef(null);
     const procurementRef = useRef(null);
@@ -26,6 +26,7 @@ export default function PmrFrom({ formData, setFormData }) {
               value={formData.pr_number}
               onChange={(event) => setFormData({ ...formData, pr_number: event.target.value })}
               onKeyDown={handleKeyDown(rfqNumberRef)}
+              required
               className="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
   
@@ -38,6 +39,7 @@ export default function PmrFrom({ formData, setFormData }) {
               value={formData.rfq_number}
               onChange={(event) => setFormData({ ...formData, rfq_number: event.target.value })}
               onKeyDown={handleKeyDown(procurementRef)}
+              required
               className="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
   
@@ -50,9 +52,10 @@ export default function PmrFrom({ formData, setFormData }) {
               value={formData.procurement}
               onChange={(event) => setFormData({ ...formData, procurement: event.target.value })}
               onKeyDown={handleKeyDown(endUserRef)}
+              required
               className="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
-  
+            {error && <p className='text-red-500'>{error}</p>}
             <label htmlFor="end_user" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               End-User
             </label>
@@ -61,18 +64,21 @@ export default function PmrFrom({ formData, setFormData }) {
               type="text"
               value={formData.end_user}
               onChange={(event) => setFormData({ ...formData, end_user: event.target.value })}
+              required
               className="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
-  
+            {error && <p className='text-red-500'>{error}</p>}
             <label htmlFor="date" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Date
             </label>
             <TextInput
               type="date"
               value={formData.date}
+              required
               onChange={(event) => setFormData({ ...formData, date: event.target.value })}
               className="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
+              {error && <p className='text-red-500'>{error}</p>}
           </div>
         </div>
       </div>

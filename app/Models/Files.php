@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\FolderName;
+use App\Models\SubFolder;
 
 class Files extends Model
 {
@@ -17,13 +18,14 @@ class Files extends Model
         'user_id',
         'file_name',
         'file_path',
+        'subfolder_name_id',
         'folder_dir',
         'description',
     ];
 
     protected $guarded = [];
 
-    protected $with = ['user','folder'];
+    protected $with = ['user','folder','subfolder'];
 
     
     public function user()
@@ -34,6 +36,10 @@ class Files extends Model
     public function folder()
     {
         return $this->belongsTo(FolderName::class, 'folder_name_id', 'id');
+    }
+
+    public function subfolder(){
+        return $this->belongsTo(SubFolder::class, 'subfolder_name_id', 'id');
     }
     
 }

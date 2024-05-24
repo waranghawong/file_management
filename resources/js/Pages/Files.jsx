@@ -17,23 +17,25 @@ const columns = [
     'created_at',
 ] 
 
-export default function Files({auth, get_file}) {
+export default function Files({auth, get_file, subfolder}) {
+    console.log(get_file);
 
   const [isOpen , setIsOpen] = useState(false)
-
   const { data, setData, post, processing, errors, reset } = useForm({
         file_name: '',
         file: '',
         description: '',
         folder_name: get_file.data[0].folder.folder_name,
         folder_id: get_file.data[0].folder.id,
+        subfolder_name: '', 
+        subfolder_id: '', 
         uploader_id: auth.user.id,
     });
 
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('uploadfile'),{
+        post(route('uploadfilesubfolder'),{
             preserveScroll: true,
             onSuccess: ()=>{
                 setIsOpen(false)
@@ -43,7 +45,24 @@ export default function Files({auth, get_file}) {
 
     };
 
-    console.log()
+    const [showFolderInput, setFolderInput] = useState(true); 
+
+    const newFolderSelected = (e) =>{
+        let index = e.nativeEvent.target.selectedIndex;
+        let label = e.nativeEvent.target[index].text;
+    
+        const value = e.target.value;
+    
+    
+        if(e.target.value == 'other'){
+            setFolderInput(false)
+            setData({ ...data, subfolder_id: "", subfolder_name: ""})
+        }
+        else{
+            setFolderInput(true)
+            setData({ ...data, subfolder_id: e.target.value, subfolder_name: label})
+        }
+    }
 
   return (
     <div>
@@ -87,6 +106,36 @@ export default function Files({auth, get_file}) {
                             <div className="col-span-2">
                                 <label for="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">File Description</label>
                                 <textarea id="description" onChange={(e) => setData('description', e.target.value)} rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write the file description here"></textarea>                    
+                            </div>
+
+                            <div className="col-span-2 sm:col-span-1">
+                                <label for="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                                    <select 
+                                        id="category" 
+                                        onChange={newFolderSelected} 
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    >
+                                        <option value="">Select Sub Folder</option> 
+                                        {
+                                            subfolder.map((option) => (
+                                                <option value={option.value}>{option.label}</option>
+                                            ))
+                                        }
+                                        <option value="other">New Sub Folder</option>
+                            
+                                        
+                                    </select>
+                                    <br />
+                                    <TextInput
+                                            id="folder_name"
+                                            name="subfolder_name"
+                                            className={ showFolderInput  ? 'hidden' : ''  + "p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}
+                                            value={data.subfolder_name}
+                                            placeholder="Sub Folder Name"
+                                            onChange = {(e) => setData('subfolder_name', e.target.value)}
+                                            required
+                                        />
+                                    <InputError message={errors.subfolder_name} className="mt-2" />
                             </div>
                         
                             <div className="col-span-2 sm:col-span-1">

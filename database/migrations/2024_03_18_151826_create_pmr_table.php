@@ -19,11 +19,12 @@ return new class extends Migration
             $table->string('rfq_number');
             $table->string('procurement_project');
             $table->string('end_user')->nullable();
+            $table->date('date')->nullable();
             $table->string('source_of_funds')->nullable();
             $table->string('abc')->nullable();
             $table->string('contract_amount')->nullable();
             $table->string('supplier')->nullable();
-            $table->enum('status',['awarded', 'failed', 'close', 'partially_awarded', 'cancelled', 'incomplete', 'others'])->nullable('');
+            $table->string('status');
             $table->timestamps();
         });
     }

@@ -2,16 +2,18 @@ import { useState } from 'react'
 import TextInput from '@/Components/TextInput'
 import Select from 'react-select';
 
-export default function LastForm({ formData, setFormData }) {
-
+export default function LastForm({ formData, setFormData, errors}) {
+  const [error, setError] = useState('');
   const options = [
-    {  value: "awarded", label: "Awarded"},
-    {  value: "failed", label: "Failed"},
-    {  value: "close", label: "Close"},
-    {  value: "partially awarded", label: "Partially Awarded"},
-    {  value: "cancelled", label: "Cancelled"},
+    {  value: "Awarded", label: "Awarded"},
+    {  value: "Failed", label: "Failed"},
+    {  value: "Close", label: "Close"},
+    {  value: "Partially Awarded", label: "Partially Awarded"},
+    {  value: "Cancelled", label: "Cancelled"},
     {  value: "incomplete", label: "Incomplete"},
-    {  value: "others", label: "Others"},
+    {  value: "Re-PR", label: "Re-PR"},
+    {  value: "Re-Canvass", label: "Re-Canvass"},
+    {  value: "Others", label: "Others"},
   ]
 
   const [selectedOption, setSelectedOption] = useState(false)
@@ -23,6 +25,19 @@ export default function LastForm({ formData, setFormData }) {
       setFormData({ ...formData, status: selectedOption.value })
 
   };
+
+  const contractAmount = (event) => {
+    if(formData.abc < event.target.value){
+      setError('contract amount should not be greater than abc');
+    }
+    else{
+      setError('');
+      setFormData({ ...formData, contract_amount: event.target.value })
+    }
+
+
+    
+  }
 
   return (
     <div>
@@ -37,6 +52,7 @@ export default function LastForm({ formData, setFormData }) {
             }
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
             required />
+            {errors && <p className='text-red-500'>{errors}</p>}
           </div>
           <div class="mb-5">
             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Supplier</label>
@@ -48,6 +64,7 @@ export default function LastForm({ formData, setFormData }) {
             }
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
             required />
+            {errors && <p className='text-red-500'>{errors}</p>}
           </div>
           <div class="mb-5">
             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ABC</label>
@@ -66,7 +83,9 @@ export default function LastForm({ formData, setFormData }) {
               }
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" 
               required />
+          
             </div>
+            {errors && <p className='text-red-500'>{errors}</p>}
           </div>
           <div class="mb-5">
           <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contract Amount</label>
@@ -80,24 +99,27 @@ export default function LastForm({ formData, setFormData }) {
               type="number" 
               value={formData.contract_amount}
               onChange={(event) =>
-                setFormData({ ...formData, contract_amount: event.target.value })
+                  contractAmount(event)
               }
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" 
               required />
             </div>
+            {error && <p className='text-red-500'>{error}</p>}
+            {errors && <p className='text-red-500'>{errors}</p>}
           </div>
           <div class="mb-5">
           <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
           <div className='max-w-sm mx-auto overflow-visible z-99999'>
           <Select
-           className=""
+           className="overflow-visible z-50"
             defaultValue={selectedOption}
             onChange={(event) =>
               handleChange(event)
             }
             options={options}
-           
+            menuPlacement="top"
           />
+            {errors && <p className='text-red-500'>{errors}</p>}
           </div>
 
           

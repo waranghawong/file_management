@@ -24,7 +24,7 @@ const columns = [
 
 
 
-export default function InsertFile( {auth, files, folder_name} ) {
+export default function InsertFile( {auth, files, folder_name, subfolder_name} ) {
 
 
     

@@ -24,6 +24,7 @@ class Pmr extends Model
         'end_user',
         'source_of_funds' ,
         'supplier',
+        'date',
         'abc',
         'contract_amount',
         'status', 

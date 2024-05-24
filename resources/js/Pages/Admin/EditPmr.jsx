@@ -16,11 +16,13 @@ export default function EditPmr({auth, pmr}) {
     const {  delete: destroy, } = useForm({});
     const [confirmingUserDeletion, setDeletePmr] = useState(false);
 
-    const { data, setData, post, processing, errors, recentlySuccessful } = useForm({
+
+    const { data, setData, patch, processing, errors, recentlySuccessful } = useForm({
         pr_number: pmr[0].pr_number,
         rfq_number: pmr[0].rfq_number,
         procurement: pmr[0].procurement_project,
         end_user: pmr[0].end_user,
+        date: pmr[0].date,
 
         pre_proc: pmr[0].competitive ?  pmr[0].competitive.pre_proc_conf : ''  ,
         eligibility_check: pmr[0].competitive ?  pmr[0].competitive.eligibility_check: ''  ,
@@ -55,10 +57,27 @@ export default function EditPmr({auth, pmr}) {
         status: pmr[0].status,
     });
 
+  
     const pr_number = useRef(null);
+
+    const [message, setMessage] = useState('');
+
+    const [popup, openPopup] = useState(false);
+
 
     const submit = (e) => {
         e.preventDefault();
+        patch(route('update_pmr', pmr[0].id),{
+            onSuccess: (page) => {
+                window.scrollTo({ top: 0, behavior: 'instant' });
+                openPopup(true)
+                setMessage('PMR updated successfully!');
+            },
+            onError: (errors) => {
+                setSending(false);
+            }
+
+        });
     };
 
     const confirmUserDeletion = () => {
@@ -76,7 +95,6 @@ export default function EditPmr({auth, pmr}) {
         const array_match = JSON.stringify(deleteKeyword) == JSON.stringify(compare)
         if(array_match == true){
             destroy(route('pmr.destroy', pmr[0].id), {
-                preserveScroll: true,
                 onSuccess: () => closeModal(),
                 onError: () => passwordInput.current.focus(),
                 onFinish: () => reset(),
@@ -137,7 +155,7 @@ export default function EditPmr({auth, pmr}) {
         setData({ ...data, pre_end: selectedOption.target.checked })
        }
 
-    console.log(data.pr_recieved)
+     
 
   return (
  
@@ -147,6 +165,22 @@ export default function EditPmr({auth, pmr}) {
     >
         <Head title="Edit Files" />
         <div className="py-32">
+        <div>
+            {popup && 
+           <div id="success-alert" class="flex items-center p-4 mb-4 text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800" role="alert">
+            Success! {message}
+            <button type="button" onClick={() => openPopup(false)}  class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-2" aria-label="Close">
+             
+                <span class="sr-only">Close</span>
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+            
+            </button>
+            </div>
+            
+            }
+        </div>
             <div className="w-1/2  mx-auto sm:px-6 lg:px-8 space-y-6 p-4 shadow-lg bg-white dark:bg-slate-800 rounded-xl bg-white">
                 <form onSubmit={submit} className="mt-6 space-y-6">
                     <div className="sm:p-8 sm:rounded-lg  p-4">
@@ -206,6 +240,19 @@ export default function EditPmr({auth, pmr}) {
                                          setData({ ...data, end_user: event.target.value })
                                      }
                                     type="text"
+                                    className="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    />
+                                </div>
+                                <div class="relative z-0 w-full group">
+                                    <label htmlFor="end_user" className="block mb-2 text-xs font-medium text-gray-900 mr-12 dark:text-white ">
+                                    Date
+                                    </label>
+                                    <TextInput
+                                     value={data.date}
+                                     onChange={(event) =>
+                                         setData({ ...data, date: event.target.value })
+                                     }
+                                    type="date"
                                     className="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     />
                                 </div>
@@ -481,27 +528,27 @@ export default function EditPmr({auth, pmr}) {
                             <br />
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 place-items-center flex-wrap">
                                 <div class="relative z-0 w-full group">
-                                    <label htmlFor="pr_number" className="block mb-2 text-xs font-medium text-gray-900 mr-10 dark:text-white ">
+                                    <label htmlFor="source_of_funds" className="block mb-2 text-xs font-medium text-gray-900 mr-10 dark:text-white ">
                                     Source of Funds
                                     </label>
                                     <TextInput
-                                     value={data.end_user}
+                                     value={data.source_of_funds}
                                      onChange={(event) =>
-                                         setData({ ...data, end_user: event.target.value })
+                                         setData({ ...data, source_of_funds: event.target.value })
                                      }
                                     type="text"
                                     className="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     />
                                 </div>
                                 <div class="relative z-0 w-full group">
-                                    <label htmlFor="rfq_number" className="block mb-2 text-xs font-medium text-gray-900 mr-10 dark:text-white ">
+                                    <label htmlFor="supplier" className="block mb-2 text-xs font-medium text-gray-900 mr-10 dark:text-white ">
                                     Supplier
                                     </label>
                                     <TextInput
                                     type="text"
-                                    value={data.end_user}
+                                    value={data.supplier}
                                     onChange={(event) =>
-                                        setData({ ...data, end_user: event.target.value })
+                                        setData({ ...data, supplier: event.target.value })
                                     }
                                     className="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     />
@@ -512,35 +559,35 @@ export default function EditPmr({auth, pmr}) {
                                     </label>
                                     <TextInput
                                     type="text"
-                                    value={data.end_user}
+                                    value={data.abc}
                                     onChange={(event) =>
-                                        setData({ ...data, end_user: event.target.value })
+                                        setData({ ...data, abc: event.target.value })
                                     }
                                     className="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     />
                                 </div>
                                 <div class="relative z-0 w-full group">
-                                    <label htmlFor="end_user" className="block mb-2 text-xs font-medium text-gray-900 mr-12 dark:text-white ">
+                                    <label htmlFor="contract_amount" className="block mb-2 text-xs font-medium text-gray-900 mr-12 dark:text-white ">
                                     Contract Amount
                                     </label>
                                     <TextInput
                                     type="text"
-                                    value={data.end_user}
+                                    value={data.contract_amount}
                                     onChange={(event) =>
-                                        setData({ ...data, end_user: event.target.value })
+                                        setData({ ...data, contract_amount: event.target.value })
                                     }
                                     className="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     />
                                 </div>
                                 <div class="relative z-0 w-full group">
-                                    <label htmlFor="end_user" className="block mb-2 text-xs font-medium text-gray-900 mr-12 dark:text-white ">
+                                    <label htmlFor="status" className="block mb-2 text-xs font-medium text-gray-900 mr-12 dark:text-white ">
                                     Status
                                     </label>
                                     <TextInput
                                     type="text"
-                                    value={data.end_user}
+                                    value={data.status}
                                     onChange={(event) =>
-                                        setData({ ...data, end_user: event.target.value })
+                                        setData({ ...data, status: event.target.value })
                                     }
                                     className="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     />
@@ -551,7 +598,6 @@ export default function EditPmr({auth, pmr}) {
                     <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
                     <button 
                             type="submit" 
-                            disabled
                             className="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             <svg className="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
                             Submit
