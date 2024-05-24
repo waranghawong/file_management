@@ -17,20 +17,20 @@ const columns = [
     'created_at',
 ] 
 
-export default function Files({auth, get_file, subfolder}) {
+export default function Files({auth, get_file, subfolder, id}) {
     const fileNames = get_file.map(obj => ({
         fileName: obj?.file_name,
         fileId: obj?.id
     }));
-
+    console.log(id)
 
   const [isOpen , setIsOpen] = useState(false)
   const { data, setData, post, processing, errors, reset } = useForm({
         file_name: '',
         file: '',
         description: '',
-        folder_name: get_file[0].folder.folder_name,
-        folder_id: get_file[0].folder.id,
+        folder_name: get_file == false ?  '' : get_file[0].folder.folder_name ,
+        folder_id: id ,
         subfolder_name: '', 
         subfolder_id: '', 
         uploader_id: auth.user.id,

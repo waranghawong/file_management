@@ -40,6 +40,14 @@ class FilesController extends Controller
             $files->save();
             
         }
+        elseif(empty($request['folder_name']) && $request->input('folder_id') != ''){
+            $files->user_id=$request->input('uploader_id');
+            $files->file_name=$request->input('file_name');
+            $files->folder_name_id=$request->input('folder_id');
+            $files->description=$request->input('description');
+            $files->file_path=$request->file('file')->store($folder);
+            $files->save(); 
+        }
         else{
          
         
@@ -77,13 +85,13 @@ class FilesController extends Controller
             $files->save();
             
         }
+        
         else{
          
         
             $folder_name = new SubFolder;
             $folder_name->folder_id=$request['folder_id'];
             $folder_name->folder_name=$request['subfolder_name'];
-            $folder_name->user_id=$request['uploader_id'];
             $folder_name->save();
 
             $id = $folder_name->id;
@@ -153,7 +161,8 @@ class FilesController extends Controller
         
         return Inertia::render('Files',[
             'get_file' => $get_file,
-            'subfolder' => $get_subfolder
+            'subfolder' => $get_subfolder,
+            'id' => $id
          ]);
     }
 }

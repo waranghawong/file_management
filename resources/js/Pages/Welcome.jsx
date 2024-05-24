@@ -4,8 +4,20 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
     return (
         <>
             <Head title="Welcome" />
-            <div className="bg-asd-image relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-                <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
+            <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-cover bg-center bg-gray-100 dark:bg-gray-900 selection:bg-red-500 selection:text-white"
+                 style={{ background: "linear-gradient(to right, #00ff00, #ffff00, #006400)" }}
+                 >
+                    <div className="flex flex-col sm:flex-row w-full">
+                        
+                    <img
+                        src="https://i0.wp.com/news.imjinteractive.net/wp-content/uploads/2023/07/DAR-FI.png?fit=1920%2C1080&ssl=1"
+                        alt="DAR Logo"
+                        className="w-full h-full object-cover"
+                    />
+                </div>
+                <div className="flex-grow p-6"></div>
+
+                     <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
                     {auth.user ? (
                         <Link
                             href={route('dashboard')}
@@ -26,13 +38,12 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                 </div>
 
                 <div className="max-w-7xl mx-auto p-6 lg:p-8">
-    <div className="flex justify-center">
-        <img
-            src="https://cdn.freelogovectors.net/wp-content/uploads/2020/04/dar-logo.png"
-            alt="DAR Logo"
-            className="h-16 w-auto bg-green-100 dark:bg-green-900"
-        />
-    </div>
+    <div className="flex justify-center mt-4">
+                        <h1 className="text-4xl font-bold text-white" style={{ fontFamily: 'Poetsen One' }}>
+                            BAC/PROCUREMENT UNIT FILE MANAGEMENT SYSTEM
+                        </h1>
+                    </div>
+
                     <div className="mt-16">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
                             <a

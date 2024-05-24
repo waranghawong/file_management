@@ -42,12 +42,12 @@ Route::middleware('auth')->group(function () {
     Route::post('uploadfile', [FilesController::class, 'addFiles'])->name('uploadfile');
     Route::post('uploadfilesubfolder', [FilesController::class, 'uploadfilesubfolder'])->name('uploadfilesubfolder');
     Route::get('edit_file_info/{id}', [FilesController::class, 'edit'])->name('edit_file_info');
-    Route::delete('admin/delete/{id}', [FilesController::class, 'destroy'])->name('file.destroy');
+  
 
     Route::get('/pmr', [PmrController::class, 'index'])->name('pmr');
     Route::post('submit_pmr', [PmrController::class, 'store'])->name('submit_pmr');
     Route::get('edit_pmr/{id}', [PmrController::class, 'edit'])->name('edit_pmr');
-    Route::delete('admin/deletepmr/{id}', [PmrController::class, 'destroy'])->name('pmr.destroy');
+   
     Route::patch('update_pmr/{id}', [PmrController::class, 'update'])->name('update_pmr');
     
     Route::get('view_pdf/{id}', [FilesController::class, 'viewpdf'])->name('view_pdf');
@@ -68,7 +68,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('admin/users/{userprofile}', [UsersController::class, 'edit'])->name('users.edit');
     Route::patch('admin/users/{id}', [UsersController::class, 'update'])->name('users.update');
 
-  
+    
+    Route::delete('admin/deletepmr/{id}', [PmrController::class, 'destroy'])->name('pmr.destroy');
+    Route::delete('admin/delete/{id}', [FilesController::class, 'destroy'])->name('file.destroy');
 
 });
 
