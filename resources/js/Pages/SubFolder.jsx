@@ -18,7 +18,7 @@ const columns = [
 ] 
 
 export default function SubFolder({auth, get_file, subfolder}) {
-    console.log(subfolder);
+    console.log(get_file.data[0].subfolder_name_id);
 
   const [isOpen , setIsOpen] = useState(false)
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -28,7 +28,7 @@ export default function SubFolder({auth, get_file, subfolder}) {
         folder_name: get_file.data[0] ? get_file.data[0].folder.folder_name : '',
         folder_id: get_file.data[0] ? get_file.data[0].folder.id : '',
         subfolder_name: '', 
-        subfolder_id: '', 
+        subfolder_id: get_file.data[0].subfolder_name_id, 
         uploader_id: auth.user.id,
     });
 

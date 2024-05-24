@@ -39,7 +39,7 @@ export default function Files({auth, get_file, subfolder}) {
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('uploadfilesubfolder'),{
+        post(route('uploadfile'),{
             preserveScroll: true,
             onSuccess: ()=>{
                 setIsOpen(false)

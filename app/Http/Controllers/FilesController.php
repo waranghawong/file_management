@@ -77,15 +77,6 @@ class FilesController extends Controller
             $files->save();
             
         }
-        elseif(empty($request['subfolder_name'])){
-            $files->user_id=$request->input('uploader_id');
-            $files->file_name=$request->input('file_name');
-            $files->folder_name_id=$request->input('folder_id');
-            $files->description=$request->input('description');
-            $files->subfolder_name_id=$request->input('subfolder_id');
-            $files->file_path=$request->file('file')->store($folder);
-            $files->save();
-        }
         else{
          
         

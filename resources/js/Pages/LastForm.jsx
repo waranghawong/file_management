@@ -4,6 +4,7 @@ import Select from 'react-select';
 
 export default function LastForm({ formData, setFormData, errors}) {
   const [error, setError] = useState('');
+  const [showOthers, setOthers] = useState(true);
   const options = [
     {  value: "Awarded", label: "Awarded"},
     {  value: "Failed", label: "Failed"},
@@ -22,7 +23,16 @@ export default function LastForm({ formData, setFormData, errors}) {
 
       console.log(`Option selected:`, selectedOption)
 
-      setFormData({ ...formData, status: selectedOption.value })
+      if(selectedOption.value == 'Others'){
+          console.log('others selected')
+          setOthers(false);
+      }
+      else{
+        setFormData({ ...formData, status: selectedOption.value })
+        setOthers(true);
+      }
+
+    
 
   };
 
@@ -121,6 +131,15 @@ export default function LastForm({ formData, setFormData, errors}) {
           />
             {errors && <p className='text-red-500'>{errors}</p>}
           </div>
+            <br />
+          <TextInput
+              name="others"
+              className={ showOthers  ? 'hidden' : ''  + "p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}
+              value={formData.others}
+              placeholder="Please specify"
+              onChange = {(event) =>  setFormData({ ...formData, others: event.target.value })}
+          
+          />
 
           
       

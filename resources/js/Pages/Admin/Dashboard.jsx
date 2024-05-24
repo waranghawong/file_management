@@ -9,11 +9,10 @@ export default function Dashboard({ auth, users, pmr, files }) {
         >
             <Head title="Dashboard" />
 
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="flex flex-col">
-                    <h2 class="mb-4 dark:text-white text-2xl font-bold">Dashboard</h2>
-                    <div class="mt-4  grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+            <div className=" bg-asd-image bg-no-repea bg-cover bg-center rounded-lg h-dvh mt-7">
+                <div className=" max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="flex flex-col mt-8">
+                    <div class="mt-4  grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 mt-14">
                         <div class="flex items-start  bg-white dark:bg-slate-800 rounded-xl bg-white p-4 shadow-lg">
                         <div class="flex h-12 w-12  bg-white dark:bg-slate-800 items-center justify-center rounded-full border border-blue-100 bg-blue-50">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

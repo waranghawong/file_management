@@ -64,6 +64,7 @@ class PmrController extends Controller
             'contract_amount' => $request->input('contract_amount'),
             'status' => $request->input('status'),
             'date' => $request->input('date'),
+            'others' => $request->input('others'),
             
              
 
@@ -159,6 +160,7 @@ class PmrController extends Controller
             'contract_amount' => $request->input('contract_amount'),
             'status' => $request->input('status'),
             'date' => $request->input('date'),
+            'others' => $request->input('others'),
         ]);
 
       

@@ -74,6 +74,7 @@ export default function Pmr({auth, users, latest_pmr_id, pmr}) {
     abc: '',
     contract_amount: '',
     status: '',
+    others: '',
 
   });
 
