@@ -39,22 +39,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/pmr', [PmrController::class, 'index'])->name('pmr');
-    Route::post('submit_pmr', [PmrController::class, 'store'])->name('submit_pmr');
-});
-
-require __DIR__.'/auth.php';
-
-Route::middleware(['auth', 'role:admin'])->group(function () {
-
-    Route::get('admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::get('admin/upload', [FilesController::class, 'index'])->name('admin.upload'); 
-    Route::get('admin/users', [UsersController::class, 'index'])->name('users');
-    Route::get('admin/users/new', [UsersController::class, 'create'])->name('users.new');
-    Route::post('admin/users/create', [UsersController::class, 'store'])->name('users.store');
-    Route::get('admin/users/{userprofile}', [UsersController::class, 'edit'])->name('users.edit');
-    Route::patch('admin/users/{id}', [UsersController::class, 'update'])->name('users.update');
-
     Route::post('uploadfile', [FilesController::class, 'addFiles'])->name('uploadfile');
     Route::post('uploadfilesubfolder', [FilesController::class, 'uploadfilesubfolder'])->name('uploadfilesubfolder');
     Route::get('edit_file_info/{id}', [FilesController::class, 'edit'])->name('edit_file_info');
@@ -69,6 +53,22 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('view_pdf/{id}', [FilesController::class, 'viewpdf'])->name('view_pdf');
     Route::get('show_folder/{id}', [FilesController::class, 'show_folder'])->name('show_folder');
     Route::get('show_files/{id}', [FilesController::class, 'show_files'])->name('show_files');
+    Route::get('admin/upload', [FilesController::class, 'index'])->name('admin.upload'); 
+});
+
+require __DIR__.'/auth.php';
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+
+    Route::get('admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+
+    Route::get('admin/users', [UsersController::class, 'index'])->name('users');
+    Route::get('admin/users/new', [UsersController::class, 'create'])->name('users.new');
+    Route::post('admin/users/create', [UsersController::class, 'store'])->name('users.store');
+    Route::get('admin/users/{userprofile}', [UsersController::class, 'edit'])->name('users.edit');
+    Route::patch('admin/users/{id}', [UsersController::class, 'update'])->name('users.update');
+
+  
 
 });
 
