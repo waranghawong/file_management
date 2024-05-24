@@ -47,7 +47,7 @@ export default function ReactDataTable({items,action}) {
         },
         {
           name: "Folder Name",
-          selector: row => row.subfolder.folder_name,
+          selector: row => row.subfolder ? row.subfolder.folder_name : '',
           sortable: true
         },
         {

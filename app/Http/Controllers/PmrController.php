@@ -27,7 +27,6 @@ class PmrController extends Controller
         $id = IdGenerator::generate($config);
  
    
-        
         return Inertia::render('Pmr',[
             'users' => $users,
             'latest_pmr_id' => $currentYear,

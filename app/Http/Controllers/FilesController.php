@@ -77,6 +77,15 @@ class FilesController extends Controller
             $files->save();
             
         }
+        elseif(empty($request['subfolder_name'])){
+            $files->user_id=$request->input('uploader_id');
+            $files->file_name=$request->input('file_name');
+            $files->folder_name_id=$request->input('folder_id');
+            $files->description=$request->input('description');
+            $files->subfolder_name_id=$request->input('subfolder_id');
+            $files->file_path=$request->file('file')->store($folder);
+            $files->save();
+        }
         else{
          
         
@@ -138,8 +147,19 @@ class FilesController extends Controller
     }
 
     public function show_files(string $id){
-        $get_file = Files::where('folder_name_id', $id)->with('folder')->paginate(10);
+        $get_file = Files::where('subfolder_name_id', $id)->with('folder')->paginate(10);
         $get_subfolder = SubFolder::select(['id as value','folder_name as label'])->where('folder_id', $id)->get();
+
+        return Inertia::render('SubFolder',[
+            'get_file' => $get_file,
+            'subfolder' => $get_subfolder
+         ]);
+    }
+
+    public function show_folder(string $id){
+        $get_file = Files::where('folder_name_id', $id)->where('subfolder_name_id', null)->with('folder')->get();
+        $get_subfolder = SubFolder::select(['id as value','folder_name as label'])->where('folder_id', $id)->get();
+        
         return Inertia::render('Files',[
             'get_file' => $get_file,
             'subfolder' => $get_subfolder

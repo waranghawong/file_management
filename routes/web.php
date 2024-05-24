@@ -67,6 +67,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::patch('update_pmr/{id}', [PmrController::class, 'update'])->name('update_pmr');
     
     Route::get('view_pdf/{id}', [FilesController::class, 'viewpdf'])->name('view_pdf');
+    Route::get('show_folder/{id}', [FilesController::class, 'show_folder'])->name('show_folder');
     Route::get('show_files/{id}', [FilesController::class, 'show_files'])->name('show_files');
 
 });
