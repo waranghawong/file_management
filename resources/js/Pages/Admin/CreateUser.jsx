@@ -30,7 +30,7 @@ export default function CreateUser({auth}) {
 
     const roles = [
         'Choose Role',
-        'sub-admin',
+        'admin',
         'customer'
     ]
 
