@@ -11,7 +11,7 @@ const columns = [
     'email',
 ] 
 export default function Dashboard({ auth, users }) {
-    console.log(users)
+    console.log(users.links)
     return (
         <AuthenticatedLayout
             user={auth.user}
