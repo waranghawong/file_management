@@ -28,6 +28,7 @@ class Pmr extends Model
         'abc',
         'contract_amount',
         'status', 
+        'others', 
     ];
 
     protected $guarded = [];

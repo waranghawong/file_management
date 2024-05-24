@@ -26,6 +26,7 @@ export default function LastForm({ formData, setFormData, errors}) {
       if(selectedOption.value == 'Others'){
           console.log('others selected')
           setOthers(false);
+          setFormData({ ...formData, status: selectedOption.value })
       }
       else{
         setFormData({ ...formData, status: selectedOption.value })

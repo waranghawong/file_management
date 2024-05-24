@@ -55,6 +55,7 @@ export default function EditPmr({auth, pmr}) {
         abc: pmr[0].abc,
         contract_amount: pmr[0].contract_amount,
         status: pmr[0].status,
+        others: pmr[0].others ? pmr[0].others : '',
     });
 
   
@@ -592,6 +593,29 @@ export default function EditPmr({auth, pmr}) {
                                     className="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     />
                                 </div>
+                                {
+                                    data.others
+                                    ?
+
+                                    <div class="relative z-0 w-full group">
+                                        <label htmlFor="status" className="block mb-2 text-xs font-medium text-gray-900 mr-12 dark:text-white ">
+                                        Others
+                                        </label>
+                                        <TextInput
+                                        type="text"
+                                        value={data.others}
+                                        onChange={(event) =>
+                                            setData({ ...data, others: event.target.value })
+                                        }
+                                        className="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        />
+                                    </div>
+
+                                    :
+
+                                    ''
+                                }
+                                
                             </div>
                         </div>
                     </div>
