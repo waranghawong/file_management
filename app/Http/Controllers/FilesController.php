@@ -75,6 +75,7 @@ class FilesController extends Controller
             $folder_name = new SubFolder;
             $folder_name->folder_id=$request['folder_id'];
             $folder_name->folder_name=$request['subfolder_name'];
+            $folder_name->user_id=$request->input('uploader_id');
             $folder_name->save();
 
             $id = $folder_name->id;
@@ -84,6 +85,7 @@ class FilesController extends Controller
             $files->file_name=$request->input('file_name');
             $files->folder_name_id=$request->input('folder_id');
             $files->description=$request->input('description');
+            $files->subfolder_name_id=$id;
             $files->file_path=$request->file('file')->store($folder);
             $files->save(); 
         }
