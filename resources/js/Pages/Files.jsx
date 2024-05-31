@@ -22,7 +22,7 @@ export default function Files({auth, get_file, subfolder, id}) {
         fileName: obj?.file_name,
         fileId: obj?.id
     }));
-    console.log(id)
+    console.log(subfolder)
 
   const [isOpen , setIsOpen] = useState(false)
   const { data, setData, post, processing, errors, reset } = useForm({

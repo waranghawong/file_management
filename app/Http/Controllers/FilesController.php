@@ -27,10 +27,11 @@ class FilesController extends Controller
     {   
         $files = new Files;
         $asd = FolderName::where('id', $request['folder_id'])->exists();
-
+        $subfolder = SubFolder::where('id', $request['subfolder_id'])->exists();
         $folder = $request['folder_name'];
 
-        if($asd){
+
+        if($asd && $request['subfolder_name'] == null){
 
             $files->user_id=$request->input('uploader_id');
             $files->file_name=$request->input('file_name');
@@ -40,17 +41,8 @@ class FilesController extends Controller
             $files->save();
             
         }
-        elseif(empty($request['folder_name']) && $request->input('folder_id') != ''){
-            $files->user_id=$request->input('uploader_id');
-            $files->file_name=$request->input('file_name');
-            $files->folder_name_id=$request->input('folder_id');
-            $files->description=$request->input('description');
-            $files->file_path=$request->file('file')->store($folder);
-            $files->save(); 
-        }
-        else{
-         
-        
+        else if($request['folder_id'] == null && $request['subfolder_name'] == null){
+
             $folder_name = new FolderName;
             $folder_name->folder_name=$request['folder_name'];
             $folder_name->save();
@@ -63,16 +55,49 @@ class FilesController extends Controller
             $files->description=$request->input('description');
             $files->file_path=$request->file('file')->store($folder);
             $files->save();
+
+          
+        }
+        else if ($request['subfolder_id']){ 
+            
+            $files->user_id=$request->input('uploader_id');
+            $files->file_name=$request->input('file_name');
+            $files->folder_name_id=$request->input('folder_id');
+            $files->description=$request->input('description');
+            $files->subfolder_name_id=$request->input('subfolder_id');
+            $files->file_path=$request->file('file')->store($folder);
+            $files->save();
+
+
+            
+        }
+        else{
+            $folder_name = new SubFolder;
+            $folder_name->folder_id=$request['folder_id'];
+            $folder_name->folder_name=$request['subfolder_name'];
+            $folder_name->save();
+
+            $id = $folder_name->id;
+
+
+            $files->user_id=$request->input('uploader_id');
+            $files->file_name=$request->input('file_name');
+            $files->folder_name_id=$request->input('folder_id');
+            $files->description=$request->input('description');
+            $files->file_path=$request->file('file')->store($folder);
+            $files->save(); 
         }
 
     }
 
     function uploadfilesubfolder(Request $request)
     { 
+      
         $files = new Files;
         $asd = SubFolder::where('id', $request['subfolder_id'])->exists();
 
         $folder = $request['folder_name'];
+
 
         if($asd){
 
@@ -88,6 +113,7 @@ class FilesController extends Controller
         
         else{
          
+            
         
             $folder_name = new SubFolder;
             $folder_name->folder_id=$request['folder_id'];
@@ -158,7 +184,7 @@ class FilesController extends Controller
     public function show_folder(string $id){
         $get_file = Files::where('folder_name_id', $id)->where('subfolder_name_id', null)->with('folder')->get();
         $get_subfolder = SubFolder::select(['id as value','folder_name as label'])->where('folder_id', $id)->get();
-        
+
         return Inertia::render('Files',[
             'get_file' => $get_file,
             'subfolder' => $get_subfolder,

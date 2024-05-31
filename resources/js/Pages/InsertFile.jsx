@@ -36,6 +36,8 @@ export default function InsertFile( {auth, files, folder_name, subfolder_name} )
         description: '',
         folder_name: '',
         folder_id: '',
+        subfolder_name: '', 
+        subfolder_id: '', 
         uploader_id: auth.user.id,
     });
 
