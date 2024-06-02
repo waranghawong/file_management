@@ -54,6 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::get('show_folder/{id}', [FilesController::class, 'show_folder'])->name('show_folder');
     Route::get('show_files/{id}', [FilesController::class, 'show_files'])->name('show_files');
     Route::get('admin/upload', [FilesController::class, 'index'])->name('admin.upload'); 
+    Route::delete('file/delete/{id}', [FilesController::class, 'destroy'])->name('file.destroy');
 });
 
 require __DIR__.'/auth.php';
@@ -70,7 +71,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     
     Route::delete('admin/deletepmr/{id}', [PmrController::class, 'destroy'])->name('pmr.destroy');
-    Route::delete('admin/delete/{id}', [FilesController::class, 'destroy'])->name('file.destroy');
+
 
 });
 
