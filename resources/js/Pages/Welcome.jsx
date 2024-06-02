@@ -10,7 +10,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     <div className="flex flex-col sm:flex-row w-full">
                         
                     <img
-                        src="https://i0.wp.com/news.imjinteractive.net/wp-content/uploads/2023/07/DAR-FI.png?fit=1920%2C1080&ssl=1"
+                        src="https://i.pinimg.com/originals/cf/6c/92/cf6c921f5cd744de45936350dff8fea0.png"
                         alt="DAR Logo"
                         className="w-full h-full object-cover"
                     />
@@ -21,7 +21,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     {auth.user ? (
                         <Link
                             href={route('dashboard')}
-                            className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                            className="font-semibold text-gray-900 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
                         >
                             Dashboard
                         </Link>
@@ -29,7 +29,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                         <>
                             <Link
                                 href={route('login')}
-                                className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                className="font-semibold text-gray-900 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
                             >
                                 Log in
                             </Link>
@@ -38,9 +38,9 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                 </div>
 
                 <div className="max-w-7xl mx-auto p-6 lg:p-8">
-    <div className="flex justify-center mt-4">
-                        <h1 className="text-4xl font-bold text-white" style={{ fontFamily: 'Poetsen One' }}>
-                            BAC/PROCUREMENT UNIT FILE MANAGEMENT SYSTEM
+    <div className="flex text-center mt-4">
+                        <h1 className="text-6xl font-bold text-gray" style={{ fontFamily: 'Poetsen One' }}>
+                            PROCUREMENT UNIT FILE MANAGEMENT SYSTEM
                         </h1>
                     </div>
 

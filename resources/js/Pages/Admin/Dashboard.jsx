@@ -9,7 +9,7 @@ export default function Dashboard({ auth, users, pmr, files }) {
         >
             <Head title="Dashboard" />
 
-            <div className=" bg-asd-image bg-no-repea bg-cover bg-center rounded-lg h-dvh mt-7">
+            <div className=" bg-asd.png-image bg-no-repeat bg-cover bg-center rounded-lg h-dvh mt-7">
                 <div className=" max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="flex flex-col mt-8">
                     <div class="mt-4  grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 mt-14">

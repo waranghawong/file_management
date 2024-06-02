@@ -29,6 +29,7 @@ class Amp extends Model
         'justification',
         'pr_supply',
         'pr_end_user',
+        'amp_others',
     ];
 
    

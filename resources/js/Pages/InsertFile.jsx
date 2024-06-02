@@ -188,7 +188,7 @@ const loadOptions = (searchValue, callback) => {
 
 
                     <div className="w-full  mx-auto sm:px-6 lg:px-8 space-y-6 p-4 shadow-lg bg-white dark:bg-slate-800 rounded-xl bg-white">
-                        <div class="grid grid-cols-4 md:grid-cols-6 gap-4">
+                        <div class="grid grid-cols-4 lg:grid-cols-6 gap-4">
                             {
                                  folder_name.map((item, index) => (
                                     <div className='mt-5 '>

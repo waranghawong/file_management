@@ -49,6 +49,7 @@ export default function EditPmr({auth, pmr}) {
         justification: pmr[0].amps ? pmr[0].amps.justification : '',
         pr_supply: pmr[0].amps ? pmr[0].amps.pr_supply : '',
         pre_end: pmr[0].amps ? pmr[0].amps.pr_end_user : '',
+        amp_others: pmr[0].amps ? pmr[0].amps.amp_others : '',
     
         source_of_funds: pmr[0].source_of_funds,
         supplier: pmr[0].supplier,
@@ -381,6 +382,19 @@ export default function EditPmr({auth, pmr}) {
                                         className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'/>
                                         <label for="pre_end" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">PR-END-User</label>
                                     </div>
+                                    <div class="relative z-0 w-full text-wrap">
+                                    <label htmlFor="procurement" className="block mb-2 text-xs font-medium text-gray-900 dark:text-white">
+                                    Others
+                                    </label>
+                                    <TextInput
+                                    type="text"
+                                    value={data.amp_others}
+                                    onChange={(event) =>
+                                        setData({ ...data, amp_others: event.target.value })
+                                    }
+                                    className="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    />
+                                </div>
                                 </div>
                         </div>
                     </div>

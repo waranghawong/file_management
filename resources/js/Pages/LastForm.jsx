@@ -11,7 +11,7 @@ export default function LastForm({ formData, setFormData, errors}) {
     {  value: "Close", label: "Close"},
     {  value: "Partially Awarded", label: "Partially Awarded"},
     {  value: "Cancelled", label: "Cancelled"},
-    {  value: "incomplete", label: "Incomplete"},
+    {  value: "inprocess", label: "Inprocess"},
     {  value: "Re-PR", label: "Re-PR"},
     {  value: "Re-Canvass", label: "Re-Canvass"},
     {  value: "Others", label: "Others"},

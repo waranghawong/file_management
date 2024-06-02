@@ -89,7 +89,7 @@ class PmrController extends Controller
                 'justification' => $request->input('justification'),
                 'pr_supply' => $request->input('pr_supply'),
                 'pr_end_user' => $request->input('pre_end'),
-
+                'amp_others' => $request->input('amp_others'),
                 ]);
               
 
@@ -181,6 +181,7 @@ class PmrController extends Controller
                 'justification' => $request->input('justification'),
                 'pr_supply' => $request->input('pr_supply'),
                 'pr_end_user' => $request->input('pre_end'),
+                'amp_others' => $request->input('amp_others'),
 
                 ]);
               

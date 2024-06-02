@@ -225,115 +225,148 @@ export default function Others({ formData, setFormData,users,amp, compi }) {
            <div>
              <form class="max-w-xlg mx-auto">
                 <div class="grid md:grid-cols-3 md:gap-6 p-6">
-                    <div class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
+                     <div class="relative z-0 w-full group">
                       <input
-                        type="checkbox"
+                        type="date"
                         value={formData.pr_recieved}
                          onChange={(event) =>
-                          handleChange(event)
+                          setFormData({ ...formData, pr_recieved: event.target.value })
                         }
-                         className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'/>
+                         className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"/>
                       
-                      <label for="pr_for_rfq" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">PR Recieved</label>
+                      <label for="pr_for_rfq" class="peer-focus:font-medium absolute text-lg text-pink-600 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">PR Recieved</label>
                     </div>
-                    <div class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
+                     <div class="relative z-0 w-full group">
                         <input 
-                        type="checkbox"
+                        type="date"
                         value={formData.pr_for_rfq} 
-                        onChange={prRfq} 
-                        className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'/>
-                        <label for="pr_for_rfq" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">PR for RFQs</label>
+                        onChange={(event) =>
+                          setFormData({ ...formData, pr_for_rfq: event.target.value })
+                        } 
+                        className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"/>
+                        <label for="pr_for_rfq" class="peer-focus:font-medium absolute text-lg text-pink-600 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">PR for RFQs</label>
                     
                     </div>
-                    <div class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
+                     <div class="relative z-0 w-full group">
                         <input 
-                        type="checkbox"
+                        type="date"
                         value={formData.rfq_posting} 
-                        onChange={rfqPosting} 
-                        className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'/>
-                        <label for="rfq_posting" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">RFQs for Posting</label>
+                        onChange={(event) => 
+                          setFormData({ ...formData, rfq_posting: event.target.value })
+                        } 
+                        className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"/>
+                        <label for="rfq_posting" class="peer-focus:font-medium absolute text-lg text-pink-600 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">RFQs for Posting</label>
                     
                     </div>
-                    <div class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
+                     <div class="relative z-0 w-full group">
                         <input 
-                        type="checkbox"
+                        type="date"
                         value={formData.rfq_canvass} 
-                        onChange={rfqCanvass} className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'/>
-                        <label for="rfq_canvass" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">RFQs for canvas</label>
+                        onChange={(event) =>
+                          setFormData({ ...formData, rfq_canvass: event.target.value })
+                        } 
+                        className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"/>
+                        <label for="rfq_canvass" class="peer-focus:font-medium absolute text-lg text-pink-600 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">RFQs for canvas</label>
                     </div>
-                    <div class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
+                     <div class="relative z-0 w-full group">
                         <input 
-                        type="checkbox"
+                        type="date"
                         value={formData.rfq_returned} 
-                        onChange={rfqReturned} 
-                        className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'/>
-                        <label for="rfq_returned" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">RFQs Returned(Sealed)</label>
+                        onChange={(event) =>
+                          setFormData({ ...formData, rfq_returned: event.target.value })
+                        } 
+                        className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"/>
+                        <label for="rfq_returned" class="peer-focus:font-medium absolute text-lg text-pink-600 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">RFQs Returned(Sealed)</label>
                     </div>
-                    <div class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
+                     <div class="relative z-0 w-full group">
                         <input 
-                        type="checkbox"
+                        type="date"
                         value={formData.rfq_deliberation} 
-                         
-                       
-                        onChange={rfqDeliberation} 
-                        className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'/>
-                        <label for="rfq_deliberation" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">RFQs for Deliberation of ABC</label>
+                        onChange={(event) => 
+                          setFormData({ ...formData, rfq_deliberation: event.target.value })
+                        } 
+                        className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"/>
+                        <label for="rfq_deliberation" class="peer-focus:font-medium absolute text-lg text-pink-600 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">RFQs for Deliberation of ABC</label>
                     </div>
-                    <div class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
+                     <div class="relative z-0 w-full group">
                         <input 
-                        type="checkbox"
+                        type="date"
                         value={formData.rfq_abstract} 
-                        onChange={rfqAbstract} 
-                        className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'/>
-                        <label for="rfq_abstract" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">RFQs for Abstract</label>
+                        onChange={(event) =>
+                          setFormData({ ...formData, rfq_abstract: event.target.value })
+                        } 
+                        className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"/>
+                        <label for="rfq_abstract" class="peer-focus:font-medium absolute text-lg text-pink-600 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">RFQs for Abstract</label>
                     </div>
-                    <div class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
+                     <div class="relative z-0 w-full group">
                         <input 
-                        type="checkbox"
+                        type="date"
                         value={formData.original_abstract} 
-                        onChange={rfqOriginalAbstract} 
-                        className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'/>
-                        <label for="original_abstract" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Original Abstract, PR, RFQs Supply</label>
+                        onChange={(event) =>
+                          setFormData({ ...formData, original_abstract: event.target.value })
+                        } 
+                        className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"/>
+                        <label for="original_abstract" class="peer-focus:font-medium absolute text-lg text-pink-600 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Original Abstract, PR, RFQs Supply</label>
                     </div>
-                    <div class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
+                     <div class="relative z-0 w-full group">
                         <input 
-                        type="checkbox"
+                        type="date"
                         value={formData.bac_resolution} 
-                        onChange={rfqBac} 
-                        className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'/>
-                        <label for="bac_resolution" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">BAC Resolution Supply</label>
+                        onChange={(event) => 
+                          setFormData({ ...formData, bac_resolution: event.target.value })
+                        } 
+                        className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"/>
+                        <label for="bac_resolution" class="peer-focus:font-medium absolute text-lg text-pink-600 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">BAC Resolution Supply</label>
                     </div>
-                    <div class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
+                     <div class="relative z-0 w-full group">
                         <input 
-                        type="checkbox"
+                        type="date"
                         value={formData.noa} 
-                        onChange={forNoa} 
-                        className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'/>
-                        <label for="noa" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">NOA, NTP & Contract-Supply</label>
+                        onChange={(event) =>
+                          setFormData({ ...formData, noa: event.target.value })
+                        } 
+                        className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"/>
+                        <label for="noa" class="peer-focus:font-medium absolute text-lg text-pink-600 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">NOA, NTP & Contract-Supply</label>
                     </div>
-                    <div class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
+                     <div class="relative z-0 w-full group">
                         <input 
-                        type="checkbox"
+                        type="date"
                         value={formData.justification} 
-                        onChange={forJustification} 
-                        className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'/>
-                        <label for="justification" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Justification</label>
+                        onChange={(event) => 
+                          setFormData({ ...formData, justification: event.target.value })
+                        } 
+                        className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"/>
+                        <label for="justification" class="peer-focus:font-medium absolute text-lg text-pink-600 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Justification</label>
                     </div>
-                    <div class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
+                     <div class="relative z-0 w-full group">
                         <input 
-                        type="checkbox"
+                        type="date"
                         value={formData.pr_supply} 
-                        onChange={prSupply} 
-                        className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'/>
-                        <label for="pr_supply" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">PR-Supply</label>
+                        onChange={(event) =>
+                          setFormData({ ...formData, pr_supply: event.target.value })
+                        } 
+                        className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"/>
+                        <label for="pr_supply" class="peer-focus:font-medium absolute text-lg text-pink-600 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">PR-Supply</label>
                     </div>
-                    <div class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
+                     <div class="relative z-0 w-full group">
                         <input 
-                        type="checkbox"
+                        type="date"
                         value={formData.pre_end} 
-                        onChange={preEnd} 
-                        className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'/>
-                        <label for="pre_end" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">PR-END-User</label>
+                        onChange={(event) =>
+                          setFormData({ ...formData, pre_end: event.target.value })
+                        } 
+                        className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"/>
+                        <label for="pre_end" class="peer-focus:font-medium absolute text-lg text-pink-600 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">PR-END-User</label>
+                    </div>
+                    <div class="relative z-0 w-full group">
+                        <input 
+                        type="text"
+                        value={formData.amp_others} 
+                        onChange={(event) =>
+                          setFormData({ ...formData, amp_others: event.target.value })
+                        } 
+                        className="block py-2.5 px-0 w-full text-lg text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"/>
+                        <label for="amp_others" class="peer-focus:font-medium absolute text-lg text-pink-600 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Others</label>
                     </div>
                 
                     </div>
