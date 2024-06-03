@@ -4,19 +4,17 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
     return (
         <>
             <Head title="Welcome" />
-            <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-cover bg-center bg-gray-100 dark:bg-gray-900 selection:bg-red-500 selection:text-white"
+            <div className="relative sm:flex min-h-screen bg-cover bg-center bg-gray-100 dark:bg-gray-900 selection:bg-red-500 selection:text-white"
                  style={{ background: "linear-gradient(to right, #00ff00, #ffff00, #006400)" }}
                  >
-                    <div className="flex flex-col sm:flex-row w-full">
+                    <div className="flex bg-white  flex-col sm:flex-row w-full">
                         
                     <img
                         src="https://i.pinimg.com/originals/cf/6c/92/cf6c921f5cd744de45936350dff8fea0.png"
                         alt="DAR Logo"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain"
                     />
                 </div>
-                <div className="flex-grow p-6"></div>
-
                      <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
                     {auth.user ? (
                         <Link
