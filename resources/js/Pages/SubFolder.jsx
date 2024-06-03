@@ -116,6 +116,7 @@ export default function SubFolder({auth, get_file, subfolder}) {
                                     aria-describedby="file_input_help"
                                     isFocused
                                     type="file"
+                                    required
                                     onChange={(e) => setData('file', e.target.files[0])}
                                 />
                                 <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" >SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
